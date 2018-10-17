@@ -1,5 +1,7 @@
 from requests_oauthlib import OAuth2Session
 
+from src.api.site import Site
+
 SOMFY_OAUTH = 'https://accounts.somfy.com/oauth/oauth/v2/auth'
 SOMFY_TOKEN = 'https://accounts.somfy.com/oauth/oauth/v2/token'
 SOMFY_REFRESH = 'https://accounts.somfy.com/oauth/oauth/v2/token'
@@ -30,7 +32,8 @@ class SomfyApi:
             client_secret=client_secret)
 
     def get_sites(self):
-        return self.__oauth.get('https://api.somfy.com/api/v1/site')
+        r = self.__oauth.get('https://api.somfy.com/api/v1/site')
+        return [Site(s) for s in r.json()]
 
     def get_site(self, id):
         pass
