@@ -7,13 +7,14 @@ class Site:
 
 
 class Device:
-    __slots__ = 'id', 'name', 'type', 'site_id', 'states', 'capabilities'
+    __slots__ = 'id', 'name', 'type', 'site_id', 'states', 'capabilities', 'categories'
 
     def __init__(self, json):
         self.id = json.get('id')
         self.name = json.get('name')
         self.type = json.get('type')
         self.site_id = json.get('site_id')
+        self.categories = json.get('categories')
         self.states = [State(s) for s in json.get('states')]
         self.capabilities = [Capability(c) for c in json.get('capabilities')]
 
