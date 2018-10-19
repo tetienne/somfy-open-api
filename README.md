@@ -23,7 +23,7 @@ redir_url = '<REDIR_URL>'
 secret = r'<secret>'
 
 api = SomfyApi(client_id, redir_url)
-authorization_url = api.get_authorization_url()
+authorization_url, state = api.get_authorization_url()
 print('Please go to {} and authorize access.'.format(authorization_url))
 authorization_response = input('Enter the full callback URL')
 api.request_token(authorization_response, secret)
