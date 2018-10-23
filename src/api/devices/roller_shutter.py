@@ -23,5 +23,11 @@ class RollerShutter:
     def open(self) -> None:
         self.api.send_command(self.device.id, Command('open'))
 
+    def stop(self) -> None:
+        self.api.send_command(self.device.id, Command('stop'))
+
+    def identify(self) -> None:
+        self.api.send_command(self.device.id, Command('identify'))
+
     def is_closed(self) -> bool:
         return self.position == 100
