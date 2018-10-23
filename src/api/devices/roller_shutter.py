@@ -1,13 +1,8 @@
-from src.api.model import Device, Command, Parameter
-from src.api.somfy_api import SomfyApi
+from src.api.devices.base import SomfyDevice
+from src.api.model import Command, Parameter
 
 
-class RollerShutter:
-    __slots__ = 'device', 'api'
-
-    def __init__(self, device: Device, api: SomfyApi):
-        self.device = device
-        self.api = api
+class RollerShutter(SomfyDevice):
 
     @property
     def position(self) -> int:
