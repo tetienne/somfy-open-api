@@ -5,6 +5,8 @@ from requests_oauthlib import OAuth2Session
 from src.api.model import Device, Command
 from src.api.model import Site
 
+BASE_URL = 'https://api.somfy.com/api/v1'
+
 SOMFY_OAUTH = 'https://accounts.somfy.com/oauth/oauth/v2/auth'
 SOMFY_TOKEN = 'https://accounts.somfy.com/oauth/oauth/v2/token'
 SOMFY_REFRESH = 'https://accounts.somfy.com/oauth/oauth/v2/token'
@@ -26,21 +28,21 @@ class SomfyApi:
             client_secret=client_secret)
 
     def get_sites(self) -> List[Site]:
-        r = self.__oauth.get('https://api.somfy.com/api/v1/site')
+        r = self.__oauth.get(BASE_URL + '/site')
         return [Site(s) for s in r.json()]
 
     def get_site(self, site_id: str) -> Site:
-        r = self.__oauth.get('https://api.somfy.com/api/v1/site/' + site_id)
+        r = self.__oauth.get(BASE_URL + '/site/' + site_id)
         return Site(r.json())
 
     def send_command(self, device_id: str, command: Command) -> str:
-        r = self.__oauth.post('https://api.somfy.com/api/v1/device/' + device_id + '/exec', json=command)
+        r = self.__oauth.post(BASE_URL + '/device/' + device_id + '/exec', json=command)
         return r.json().get('job_id')
 
     def get_devices(self, site_id: str) -> List[Device]:
-        r = self.__oauth.get('https://api.somfy.com/api/v1/site/' + site_id + "/device")
+        r = self.__oauth.get(BASE_URL + '/site/' + site_id + "/device")
         return [Device(d) for d in r.json()]
 
     def get_device(self, device_id) -> Device:
-        r = self.__oauth.get('https://api.somfy.com/api/v1/device/' + device_id)
+        r = self.__oauth.get(BASE_URL + '/device/' + device_id)
         return Device(r.json())
