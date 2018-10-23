@@ -1,7 +1,8 @@
-from typing import Tuple, List
+from typing import Tuple, List, Optional
 
 from requests_oauthlib import OAuth2Session
 
+from src.api.devices.types import Category
 from src.api.model import Device, Command
 from src.api.model import Site
 
@@ -39,9 +40,13 @@ class SomfyApi:
         r = self.__oauth.post(BASE_URL + '/device/' + device_id + '/exec', json=command)
         return r.json().get('job_id')
 
-    def get_devices(self, site_id: str) -> List[Device]:
-        r = self.__oauth.get(BASE_URL + '/site/' + site_id + "/device")
-        return [Device(d) for d in r.json()]
+    def get_devices(self, site_id: Optional[str] = None, category: Optional[Category] = None) -> List[Device]:
+        site_ids = [s.id for s in self.get_sites()] if site_id is None else [site_id]
+        devices = []
+        for site_id in site_ids:
+            r = self.__oauth.get(BASE_URL + '/site/' + site_id + "/device")
+            devices += [Device(d) for d in r.json() if category is None or category.value in Device(d).categories]
+        return devices
 
     def get_device(self, device_id) -> Device:
         r = self.__oauth.get(BASE_URL + '/device/' + device_id)
