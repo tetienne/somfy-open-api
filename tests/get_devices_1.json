@@ -1,0 +1,97 @@
+[
+  {
+    "id": "device-0",
+    "type": "hub_tahoma_2",
+    "categories": [
+      "hub"
+    ],
+    "states": [],
+    "capabilities": [],
+    "site_id": "site-1",
+    "available": true
+  },
+  {
+    "id": "device-1",
+    "type": "roller_shutter_positionable_stateful_generic",
+    "parent_id": "device-0",
+    "categories": [
+      "roller_shutter"
+    ],
+    "states": [
+      {
+        "name": "position",
+        "value": 100,
+        "type": "integer"
+      }
+    ],
+    "capabilities": [
+      {
+        "name": "position",
+        "parameters": [
+          {
+            "name": "position",
+            "type": "integer"
+          }
+        ]
+      },
+      {
+        "name": "close",
+        "parameters": []
+      },
+      {
+        "name": "identify",
+        "parameters": []
+      },
+      {
+        "name": "open",
+        "parameters": []
+      },
+      {
+        "name": "stop",
+        "parameters": []
+      }
+    ],
+    "site_id": "site-1",
+    "name": "Room 1",
+    "available": true
+  },
+  {
+    "id": "device-2",
+    "type": "roller_shutter_positionable_stateful_generic",
+    "parent_id": "device-0",
+    "categories": [
+      "roller_shutter"
+    ],
+    "states": [],
+    "capabilities": [
+      {
+        "name": "position",
+        "parameters": [
+          {
+            "name": "position",
+            "type": "integer"
+          }
+        ]
+      },
+      {
+        "name": "close",
+        "parameters": []
+      },
+      {
+        "name": "identify",
+        "parameters": []
+      },
+      {
+        "name": "open",
+        "parameters": []
+      },
+      {
+        "name": "stop",
+        "parameters": []
+      }
+    ],
+    "site_id": "site-1",
+    "name": "Room 2",
+    "available": true
+  }
+]
