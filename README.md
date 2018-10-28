@@ -1,5 +1,10 @@
-<img align="left" src="https://developer.somfy.com/sites/default/files/img/SoOpen.png">
-
+<p align=center>
+    <img src="https://developer.somfy.com/sites/default/files/img/SoOpen.png"/>
+</p>
+<p align=center>
+    <a href="https://travis-ci.org/tetienne/somfy-open-api"><img src="https://travis-ci.org/tetienne/somfy-open-api.svg?branch=master"/></a>
+</p>
+ 
 This library is an attempt to implement the entire Somfy API in Python 3.
 Documentation for the Somfy API can be found [here](https://developer.somfy.com/somfy-open-api/apis).
 
