@@ -1,4 +1,4 @@
-from typing import Tuple, List, Optional
+from typing import Tuple, List, Optional, Union
 
 from requests_oauthlib import OAuth2Session
 
@@ -36,7 +36,9 @@ class SomfyApi:
         r = self.__oauth.get(BASE_URL + '/site/' + site_id)
         return Site(r.json())
 
-    def send_command(self, device_id: str, command: Command) -> str:
+    def send_command(self, device_id: str, command: Union[Command, str]) -> str:
+        if isinstance(command, str):
+            command = Command(command)
         r = self.__oauth.post(BASE_URL + '/device/' + device_id + '/exec', json=command)
         return r.json().get('job_id')
 
