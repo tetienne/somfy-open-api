@@ -12,5 +12,5 @@ setup(
     url='https://github.com/tetienne/somfy-open-api',
     license='GNU General Public License v3.0',
     python_requires='>=3.4',
-    install_requires=['requests-oauthlib']
+    install_requires=['requests-oauthlib', 'typing']
 )
