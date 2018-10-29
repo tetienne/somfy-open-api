@@ -3,7 +3,9 @@ env:
     - CC_TEST_REPORTER_ID=3cd3f4810dc2d510557d2100005fd5e5497683d44f7f56b6fcd1633c3335f46b
 language: python
 python:
-  - "3.6"
+  - 3.4
+  - 3.5
+  - 3.6
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
