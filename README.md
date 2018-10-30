@@ -23,6 +23,7 @@ Documentation for the Somfy API can be found [here](https://developer.somfy.com/
 Print all covers name.
 
 ```python
+from src.api.devices.roller_shutter import RollerShutter
 from src.api.somfy_api import SomfyApi
 
 client_id = r'<CLIENT_ID>'
@@ -34,15 +35,15 @@ authorization_url, state = api.get_authorization_url()
 print('Please go to {} and authorize access.'.format(authorization_url))
 authorization_response = input('Enter the full callback URL')
 api.request_token(authorization_response, secret)
+api.automatic_refresh()
 
 sites = api.get_sites()
 devices = api.get_devices(sites[0].id)
 
-covers = [d for d in devices if 'roller_shutter' in d.categories]
+covers = [RollerShutter(d, api) for d in devices if 'roller_shutter' in d.categories]
 
 for cover in covers:
-    print(cover.name)
-
+    print("Cover {} has the following position: {}".format(cover.device.name, cover.position))
 
 ```
 
