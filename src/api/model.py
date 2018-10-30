@@ -1,4 +1,4 @@
-from typing import Dict, Union, List, Optional
+from typing import Dict, Union, List
 
 
 class Site:
@@ -52,8 +52,8 @@ class ParameterDescription:
 class Command(dict):
     __slots__ = 'name', 'parameters'
 
-    def __init__(self, name: str, parameters: Optional[Union[
-            List[Dict[str, str]], Dict[str, str]]]):
+    def __init__(self, name: str, parameters: Union[
+            List[Dict[str, str]], Dict[str, str]] = None):
         if parameters is None:
             parameters = []
         if not isinstance(parameters, list):
