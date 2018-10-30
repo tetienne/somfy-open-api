@@ -1,4 +1,4 @@
-from typing import Dict, Union, List
+from typing import Dict, Union, List, Optional
 
 
 class Site:
@@ -10,7 +10,8 @@ class Site:
 
 
 class Device:
-    __slots__ = 'id', 'name', 'type', 'site_id', 'states', 'capabilities', 'categories'
+    __slots__ = 'id', 'name', 'type', 'site_id', 'states', 'capabilities', \
+                'categories'
 
     def __init__(self, json: Dict[str, str]):
         self.id = json.get('id')
@@ -36,7 +37,8 @@ class Capability:
 
     def __init__(self, json: Dict[str, str]):
         self.name = json.get('name')
-        self.parameters = [ParameterDescription(p) for p in json.get('parameters')]
+        self.parameters = [ParameterDescription(p) for p in
+                           json.get('parameters')]
 
 
 class ParameterDescription:
@@ -50,7 +52,8 @@ class ParameterDescription:
 class Command(dict):
     __slots__ = 'name', 'parameters'
 
-    def __init__(self, name: str, parameters: Union[List[Dict[str, str]], Dict[str, str]] = None):
+    def __init__(self, name: str, parameters: Optional[Union[
+            List[Dict[str, str]], Dict[str, str]]]):
         if parameters is None:
             parameters = []
         if not isinstance(parameters, list):

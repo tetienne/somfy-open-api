@@ -3,7 +3,6 @@ from src.api.somfy_api import SomfyApi
 
 
 class SomfyDevice:
-
     __slots__ = 'device', 'api'
 
     def __init__(self, device: Device, api: SomfyApi):

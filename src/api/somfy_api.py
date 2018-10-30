@@ -17,12 +17,14 @@ class SomfyApi:
     __slots__ = '__oauth'
 
     def __init__(self, client_id: str, redirect_uri: str):
-        self.__oauth = OAuth2Session(client_id, redirect_uri=redirect_uri, auto_refresh_url=SOMFY_REFRESH)
+        self.__oauth = OAuth2Session(client_id, redirect_uri=redirect_uri,
+                                     auto_refresh_url=SOMFY_REFRESH)
 
     def get_authorization_url(self) -> Tuple[str, str]:
         return self.__oauth.authorization_url(SOMFY_OAUTH)
 
-    def request_token(self, authorization_response: str, client_secret: str) -> None:
+    def request_token(self, authorization_response: str,
+                      client_secret: str) -> None:
         self.__oauth.fetch_token(
             SOMFY_TOKEN,
             authorization_response=authorization_response,
@@ -36,18 +38,24 @@ class SomfyApi:
         r = self.__oauth.get(BASE_URL + '/site/' + site_id)
         return Site(r.json())
 
-    def send_command(self, device_id: str, command: Union[Command, str]) -> str:
+    def send_command(self, device_id: str,
+                     command: Union[Command, str]) -> str:
         if isinstance(command, str):
             command = Command(command)
-        r = self.__oauth.post(BASE_URL + '/device/' + device_id + '/exec', json=command)
+        r = self.__oauth.post(BASE_URL + '/device/' + device_id + '/exec',
+                              json=command)
         return r.json().get('job_id')
 
-    def get_devices(self, site_id: Optional[str] = None, category: Optional[Category] = None) -> List[Device]:
-        site_ids = [s.id for s in self.get_sites()] if site_id is None else [site_id]
+    def get_devices(self, site_id: Optional[str] = None,
+                    category: Optional[Category] = None) -> List[Device]:
+        site_ids = [s.id for s in self.get_sites()] if site_id is None else [
+            site_id]
         devices = []
         for site_id in site_ids:
             r = self.__oauth.get(BASE_URL + '/site/' + site_id + "/device")
-            devices += [Device(d) for d in r.json() if category is None or category.value in Device(d).categories]
+            devices += [Device(d) for d in r.json() if
+                        category is None or category.value in Device(
+                            d).categories]
         return devices
 
     def get_device(self, device_id) -> Device:

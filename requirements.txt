@@ -4,3 +4,4 @@
 pytest
 pytest-cov
 httpretty
+flake8

@@ -1,1 +1,10 @@
-[{"id":"site-1","label":"TaHoma"}, {"id":"site-2","label":"Conexoon"}]
+[
+  {
+    "id": "site-1",
+    "label": "TaHoma"
+  },
+  {
+    "id": "site-2",
+    "label": "Conexoon"
+  }
+]

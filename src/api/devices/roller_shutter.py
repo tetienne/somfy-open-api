@@ -6,11 +6,14 @@ class RollerShutter(SomfyDevice):
 
     @property
     def position(self) -> int:
-        return next((state.value for state in self.device.states if state.name == 'position')) or 0
+        return next((state.value for state in self.device.states if
+                     state.name == 'position')) or 0
 
     @position.setter
     def position(self, value: int) -> None:
-        self.api.send_command(self.device.id, Command('position', Parameter('position', value)))
+        self.api.send_command(self.device.id,
+                              Command('position',
+                                      Parameter('position', value)))
 
     def close(self) -> None:
         self.api.send_command(self.device.id, 'close')
