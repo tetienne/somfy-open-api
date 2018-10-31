@@ -15,7 +15,7 @@ Documentation for the Somfy API can be found [here](https://developer.somfy.com/
 1. Vist https://developer.somfy.com
 2. Create an account
 3. Open the *My Apps* menu
-4. Add a new App
+4. Add a new App (for testing, redirect url can be anything in https)
 4. Plug in your details into the test script below.
 
 ## Example usage
@@ -45,5 +45,33 @@ covers = [RollerShutter(d, api) for d in devices if 'roller_shutter' in d.catego
 for cover in covers:
     print("Cover {} has the following position: {}".format(cover.device.name, cover.position))
 
+```
+
+## Contribute
+Currently only roller shutter are supported. The current [documentation](https://developer.somfy.com/products-services-informations) does not give enough information to implement all the devices.
+If you want to contribute to this repository adding new devices, you can create an issue with the output of this script:
+```python
+import json
+import re
+
+client_id = r'<CLIENT_ID>'
+redir_url = '<REDIR_URL>'
+secret = r'<secret>'
+
+from src.api.somfy_api import SomfyApi
+
+api = SomfyApi(client_id, redir_url)
+authorization_url, state = api.get_authorization_url()
+print('Please go to {} and authorize access.'.format(authorization_url))
+authorization_response = input('Enter the full callback URL')
+api.request_token(authorization_response, secret)
+api.automatic_refresh()
+
+devices = api.get_devices()
+# Remove personal information
+dumps = json.dumps(devices, sort_keys=True, indent=4, separators=(',', ': '))
+dumps = re.sub('".*id.*": ".*",\n', '', dumps)
+
+print(dumps)
 ```
 
