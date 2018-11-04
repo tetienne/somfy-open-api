@@ -5,3 +5,4 @@ from enum import Enum, unique
 class Category(Enum):
     ROLLER_SHUTTER = 'roller_shutter'
     HUB = 'hub'
+    INTERIOR_BLIND = 'interior_blind'

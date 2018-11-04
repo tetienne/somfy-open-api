@@ -2,7 +2,7 @@ from typing import Tuple, List, Optional, Union
 
 from requests_oauthlib import OAuth2Session
 
-from src.api.devices.types import Category
+from src.api.devices.category import Category
 from src.api.model import Device, Command
 from src.api.model import Site
 
