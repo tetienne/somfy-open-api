@@ -23,6 +23,7 @@ Documentation for the Somfy API can be found [here](https://developer.somfy.com/
 Print all covers name.
 
 ```python
+from src.api.devices.category import Category
 from src.api.devices.roller_shutter import RollerShutter
 from src.api.somfy_api import SomfyApi
 
@@ -37,10 +38,9 @@ authorization_response = input('Enter the full callback URL')
 api.request_token(authorization_response, secret)
 api.automatic_refresh()
 
-sites = api.get_sites()
-devices = api.get_devices(sites[0].id)
+devices = api.get_devices(category=Category.ROLLER_SHUTTER)
 
-covers = [RollerShutter(d, api) for d in devices if 'roller_shutter' in d.categories]
+covers = [RollerShutter(d, api) for d in devices]
 
 for cover in covers:
     print("Cover {} has the following position: {}".format(cover.device.name, cover.position))
@@ -48,7 +48,7 @@ for cover in covers:
 ```
 
 ## Contribute
-Currently only roller shutter are supported. The current [documentation](https://developer.somfy.com/products-services-informations) does not give enough information to implement all the devices.
+The current [documentation](https://developer.somfy.com/products-services-informations) does not give enough information to implement all the devices.
 If you want to contribute to this repository adding new devices, you can create an issue with the output of this script:
 ```python
 import json
