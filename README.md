@@ -2,7 +2,8 @@
     <img src="https://developer.somfy.com/sites/default/files/img/SoOpen.png"/>
 </p>
 <p align=center>
-    <a href="https://travis-ci.org/tetienne/somfy-open-api"><img src="https://travis-ci.org/tetienne/somfy-open-api.svg?branch=master"/></a>
+    <a href="https://pypi.org/project/pymfy/"><img src="https://img.shields.io/pypi/v/pymfy.svg"/></a>
+    <a href="https://travis-ci.org/tetienne/somfy-open-api"><img src="https://img.shields.io/travis/tetienne/somfy-open-api.svg"/></a>
     <a href="https://codeclimate.com/github/tetienne/somfy-open-api/maintainability"><img src="https://api.codeclimate.com/v1/badges/efefe25b6c0dc796bc1c/maintainability" /></a>
     <a href="https://codeclimate.com/github/tetienne/somfy-open-api/test_coverage"><img src="https://api.codeclimate.com/v1/badges/efefe25b6c0dc796bc1c/test_coverage" /></a>
 </p>
@@ -23,9 +24,9 @@ Documentation for the Somfy API can be found [here](https://developer.somfy.com/
 Print all covers name.
 
 ```python
-from src.api.devices.category import Category
-from src.api.devices.roller_shutter import RollerShutter
-from src.api.somfy_api import SomfyApi
+from pymfy.api.devices.roller_shutter import RollerShutter
+from pymfy.api.somfy_api import SomfyApi
+from pymfy.api.devices.types import Category
 
 client_id = r'<CLIENT_ID>'
 redir_url = '<REDIR_URL>'
@@ -58,7 +59,7 @@ client_id = r'<CLIENT_ID>'
 redir_url = '<REDIR_URL>'
 secret = r'<secret>'
 
-from src.api.somfy_api import SomfyApi
+from pymfy.api.somfy_api import SomfyApi
 
 api = SomfyApi(client_id, redir_url)
 authorization_url, state = api.get_authorization_url()

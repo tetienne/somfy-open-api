@@ -1,5 +1,5 @@
-from src.api.model import Device
-from src.api.somfy_api import SomfyApi
+from pymfy.api.model import Device
+from pymfy.api.somfy_api import SomfyApi
 
 
 class SomfyDevice:

@@ -1,5 +1,5 @@
-from src.api.devices.base import SomfyDevice
-from src.api.model import Command, Parameter
+from pymfy.api.devices.base import SomfyDevice
+from pymfy.api.model import Command, Parameter
 
 
 class RollerShutter(SomfyDevice):
