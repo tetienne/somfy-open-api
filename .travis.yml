@@ -12,7 +12,7 @@ before_script:
   - ./cc-test-reporter before-build
 script:
  - flake8
- - pytest --cov=sompy --cov-report xml
+ - pytest --cov=pymfy --cov-report xml
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 deploy:

@@ -1,6 +1,6 @@
 import json
 
-from sompy.api.model import Parameter, Command
+from pymfy.api.model import Parameter, Command
 
 
 class TestCommand:

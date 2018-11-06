@@ -12,7 +12,7 @@ from shutil import rmtree
 from setuptools import setup, Command
 
 # Package meta-data.
-NAME = 'sompy'
+NAME = 'pymfy'
 DESCRIPTION = 'A Somfy Open API library'
 URL = 'https://github.com/tetienne/somfy-open-api'
 AUTHOR = 'ETIENNE Thibaut'
