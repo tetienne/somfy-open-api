@@ -1,0 +1,1 @@
+include README.md LICENSE sompy/api/__version__.py

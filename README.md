@@ -23,8 +23,8 @@ Documentation for the Somfy API can be found [here](https://developer.somfy.com/
 Print all covers name.
 
 ```python
-from src.api.devices.roller_shutter import RollerShutter
-from src.api.somfy_api import SomfyApi
+from sompy.api.devices.roller_shutter import RollerShutter
+from sompy.api.somfy_api import SomfyApi
 
 client_id = r'<CLIENT_ID>'
 redir_url = '<REDIR_URL>'
@@ -58,7 +58,7 @@ client_id = r'<CLIENT_ID>'
 redir_url = '<REDIR_URL>'
 secret = r'<secret>'
 
-from src.api.somfy_api import SomfyApi
+from sompy.api.somfy_api import SomfyApi
 
 api = SomfyApi(client_id, redir_url)
 authorization_url, state = api.get_authorization_url()

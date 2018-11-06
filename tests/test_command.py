@@ -1,6 +1,6 @@
 import json
 
-from src.api.model import Parameter, Command
+from sompy.api.model import Parameter, Command
 
 
 class TestCommand:

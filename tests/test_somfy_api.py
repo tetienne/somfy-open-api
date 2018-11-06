@@ -2,8 +2,8 @@ import os
 
 import httpretty
 
-from src.api.devices.types import Category
-from src.api.somfy_api import BASE_URL, SomfyApi
+from sompy.api.devices.types import Category
+from sompy.api.somfy_api import BASE_URL, SomfyApi
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
