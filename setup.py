@@ -8,6 +8,7 @@ setup(
     version='0.1',
     description='A Somfy Open API library',
     long_description=os.path.join(here, 'README.md'),
+    long_description_content_type="text/markdown",
     author='ETIENNE Thibaut',
     url='https://github.com/tetienne/somfy-open-api',
     license='GNU General Public License v3.0',
