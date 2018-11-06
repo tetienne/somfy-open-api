@@ -2,7 +2,8 @@
     <img src="https://developer.somfy.com/sites/default/files/img/SoOpen.png"/>
 </p>
 <p align=center>
-    <a href="https://travis-ci.org/tetienne/somfy-open-api"><img src="https://travis-ci.org/tetienne/somfy-open-api.svg?branch=master"/></a>
+    <a href="https://pypi.org/project/pymfy/"><img src="https://img.shields.io/pypi/v/pymfy.svg"/></a>
+    <a href="https://travis-ci.org/tetienne/somfy-open-api"><img src="https://img.shields.io/travis/tetienne/somfy-open-api.svg"/></a>
     <a href="https://codeclimate.com/github/tetienne/somfy-open-api/maintainability"><img src="https://api.codeclimate.com/v1/badges/efefe25b6c0dc796bc1c/maintainability" /></a>
     <a href="https://codeclimate.com/github/tetienne/somfy-open-api/test_coverage"><img src="https://api.codeclimate.com/v1/badges/efefe25b6c0dc796bc1c/test_coverage" /></a>
 </p>
