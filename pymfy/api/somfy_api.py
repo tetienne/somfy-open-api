@@ -2,7 +2,7 @@ from typing import Tuple, List, Optional, Union
 
 from requests_oauthlib import OAuth2Session
 
-from pymfy.api.devices.types import Category
+from pymfy.api.devices.category import Category
 from pymfy.api.model import Command, Site, Device
 
 BASE_URL = 'https://api.somfy.com/api/v1'

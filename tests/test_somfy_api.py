@@ -2,7 +2,7 @@ import os
 
 import httpretty
 
-from pymfy.api.devices.types import Category
+from pymfy.api.devices.category import Category
 from pymfy.api.somfy_api import BASE_URL, SomfyApi
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
