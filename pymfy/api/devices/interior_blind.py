@@ -1,4 +1,4 @@
-from src.api.devices.base import SomfyDevice
+from pymfy.api.devices.base import SomfyDevice
 
 
 class InteriorBlind(SomfyDevice):
