@@ -11,21 +11,20 @@ class RollerShutter(SomfyDevice):
 
     @position.setter
     def position(self, value: int) -> None:
-        self.api.send_command(self.device.id,
-                              Command('position',
-                                      Parameter('position', value)))
+        command = Command('position', Parameter('position', value))
+        self.send_command(command)
 
     def close(self) -> None:
-        self.api.send_command(self.device.id, 'close')
+        self.send_command(Command('close'))
 
     def open(self) -> None:
-        self.api.send_command(self.device.id, 'open')
+        self.send_command(Command('open'))
 
     def stop(self) -> None:
-        self.api.send_command(self.device.id, 'stop')
+        self.send_command(Command('stop'))
 
     def identify(self) -> None:
-        self.api.send_command(self.device.id, 'identify')
+        self.send_command(Command('identify'))
 
     def is_closed(self) -> bool:
         return self.position == 100
