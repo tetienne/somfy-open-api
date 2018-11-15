@@ -1,4 +1,4 @@
-from typing import Dict, Union, List
+from typing import Dict, Union, List, Any
 
 
 class Site(dict):
@@ -14,7 +14,7 @@ class Device(dict):
     __slots__ = 'id', 'name', 'type', 'site_id', 'states', 'capabilities', \
                 'categories'
 
-    def __init__(self, json: Dict[str, str]):
+    def __init__(self, json: Dict[str, Any]):
         self.id = json.get('id')
         self.name = json.get('name')
         self.type = json.get('type')
