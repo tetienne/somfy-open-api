@@ -9,7 +9,7 @@ import os
 import sys
 from shutil import rmtree
 
-from setuptools import setup, Command
+from setuptools import setup, Command, find_packages
 
 # Package meta-data.
 NAME = 'pymfy'
@@ -83,7 +83,7 @@ setup(
     author=AUTHOR,
     python_requires=REQUIRES_PYTHON,
     url=URL,
-    py_modules=['src/api'],
+    packages=find_packages(exclude=('tests',)),
     install_requires=REQUIRED,
     extras_require=EXTRAS,
     include_package_data=True,
