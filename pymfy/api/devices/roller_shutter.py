@@ -1,17 +1,19 @@
+from typing import Optional
+
 from pymfy.api.devices.base import SomfyDevice
 from pymfy.api.model import Command, Parameter
 
 
 class RollerShutter(SomfyDevice):
 
-    @property
-    def position(self) -> int:
+    def get_position(self) -> int:
         return next((state.value for state in self.device.states if
                      state.name == 'position')) or 0
 
-    @position.setter
-    def position(self, value: int) -> None:
-        command = Command('position', Parameter('position', value))
+    def set_position(self, value: int,
+                     low_speed: Optional[int] = False) -> None:
+        command_name = 'position_low_speed' if low_speed else 'position'
+        command = Command(command_name, Parameter('position', value))
         self.send_command(command)
 
     def close(self) -> None:
@@ -27,4 +29,4 @@ class RollerShutter(SomfyDevice):
         self.send_command(Command('identify'))
 
     def is_closed(self) -> bool:
-        return self.position == 100
+        return self.get_position() == 100

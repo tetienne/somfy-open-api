@@ -44,7 +44,7 @@ devices = api.get_devices(category=Category.ROLLER_SHUTTER)
 covers = [RollerShutter(d, api) for d in devices]
 
 for cover in covers:
-    print("Cover {} has the following position: {}".format(cover.device.name, cover.position))
+    print("Cover {} has the following position: {}".format(cover.device.name, cover.get_position()))
 
 ```
 
