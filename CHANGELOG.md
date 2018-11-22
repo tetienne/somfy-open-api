@@ -1,4 +1,5 @@
 ### Next release
+* Add camera support
 * Add low speed support for roller shutters
 * roller shutter position is no more a property
 ### 0.2.2

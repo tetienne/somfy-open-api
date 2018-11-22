@@ -7,8 +7,7 @@ from pymfy.api.model import Command, Parameter
 class RollerShutter(SomfyDevice):
 
     def get_position(self) -> int:
-        return next((state.value for state in self.device.states if
-                     state.name == 'position')) or 0
+        return self.get_state('position') or 0
 
     def set_position(self, value: int,
                      low_speed: Optional[int] = False) -> None:
