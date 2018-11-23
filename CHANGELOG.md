@@ -1,5 +1,7 @@
 ### Next release
 *
+### 0.3.2
+* Fix Thermostat class name
 ### O.3.0
 * Add thermostat support
 * Add camera support
