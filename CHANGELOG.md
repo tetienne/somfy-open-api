@@ -1,4 +1,6 @@
 ### Next release
+*
+### O.3.0
 * Add thermostat support
 * Add camera support
 * Add low speed support for roller shutters
