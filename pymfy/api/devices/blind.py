@@ -3,6 +3,7 @@ from pymfy.api.model import Command, Parameter
 
 
 class Blind(RollerShutter):
+    """Class to represent a blind."""
 
     @property
     def orientation(self) -> int:

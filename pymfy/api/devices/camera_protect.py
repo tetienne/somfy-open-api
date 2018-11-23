@@ -5,6 +5,7 @@ from pymfy.api.model import Command
 
 
 class CameraProtect(SomfyDevice):
+    """Class to represent a camera"""
 
     def close_shutter(self) -> None:
         self.send_command(Command('close'))

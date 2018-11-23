@@ -5,6 +5,7 @@ from pymfy.api.model import Command, Parameter
 
 
 class RollerShutter(SomfyDevice):
+    """Class to represent a roller shutter."""
 
     def get_position(self) -> int:
         return self.get_state('position') or 0
