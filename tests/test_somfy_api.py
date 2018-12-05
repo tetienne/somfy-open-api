@@ -12,7 +12,7 @@ class TestSomfyApi:
     __slots__ = 'api'
 
     def setup_method(self):
-        self.api = SomfyApi('foo', 'faa')
+        self.api = SomfyApi('foo', 'faa', 'https://whatever.com')
 
     @httpretty.activate
     def test_get_sites(self):
