@@ -1,5 +1,5 @@
 ### Next release
-*
+* Implicit automatic token refresh
 ### 0.3.2
 * Fix Thermostat class name
 ### O.3.0

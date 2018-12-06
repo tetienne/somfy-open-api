@@ -14,7 +14,7 @@ class TestSomfyDevice:
     __slots__ = 'api'
 
     def setup_method(self):
-        self.api = SomfyApi('foo', 'faa')
+        self.api = SomfyApi('foo', 'faa', 'https://whatever.com')
 
     def test_unsupported_command(self):
         device_path = os.path.join(CURRENT_DIR, 'get_device.json')

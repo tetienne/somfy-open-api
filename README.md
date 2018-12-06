@@ -24,20 +24,23 @@ Documentation for the Somfy API can be found [here](https://developer.somfy.com/
 Print all covers name.
 
 ```python
+import os
+
 from pymfy.api.devices.roller_shutter import RollerShutter
 from pymfy.api.somfy_api import SomfyApi
-from pymfy.api.devices.types import Category
+from pymfy.api.devices.category import Category
 
 client_id = r'<CLIENT_ID>'
 redir_url = '<REDIR_URL>'
 secret = r'<secret>'
 
-api = SomfyApi(client_id, redir_url)
-authorization_url, state = api.get_authorization_url()
-print('Please go to {} and authorize access.'.format(authorization_url))
-authorization_response = input('Enter the full callback URL')
-api.request_token(authorization_response, secret)
-api.automatic_refresh()
+cache_path = '/optional/cache/path'
+api = SomfyApi(client_id, secret, redir_url, cache_path)
+if not os.path.isfile(cache_path):
+    authorization_url, state = api.get_authorization_url()
+    print('Please go to {} and authorize access.'.format(authorization_url))
+    authorization_response = input('Enter the full callback URL')
+    api.request_token(authorization_response)
 
 devices = api.get_devices(category=Category.ROLLER_SHUTTER)
 
@@ -61,12 +64,11 @@ secret = r'<secret>'
 
 from pymfy.api.somfy_api import SomfyApi
 
-api = SomfyApi(client_id, redir_url)
+api = SomfyApi(client_id, secret, redir_url)
 authorization_url, state = api.get_authorization_url()
 print('Please go to {} and authorize access.'.format(authorization_url))
 authorization_response = input('Enter the full callback URL')
-api.request_token(authorization_response, secret)
-api.automatic_refresh()
+api.request_token(authorization_response)
 
 devices = api.get_devices()
 # Remove personal information

@@ -1,3 +1,4 @@
+import json
 from typing import Tuple, List, Optional, Union
 
 from requests_oauthlib import OAuth2Session
@@ -13,59 +14,72 @@ SOMFY_REFRESH = 'https://accounts.somfy.com/oauth/oauth/v2/token'
 
 
 class SomfyApi:
-    __slots__ = '__oauth', '__session'
+    __slots__ = '_oauth', 'client_id', 'client_secret', 'cache_path', '_token'
 
-    def __init__(self, client_id: str, redirect_uri: str):
-        self.__oauth = OAuth2Session(client_id, redirect_uri=redirect_uri,
-                                     auto_refresh_url=SOMFY_REFRESH)
-        self.__session = {'client_id': client_id}
+    def __init__(self, client_id: str, client_secret: str, redirect_uri: str,
+                 cache_path: str = None):
 
-    def get_authorization_url(self) -> Tuple[str, str]:
-        return self.__oauth.authorization_url(SOMFY_OAUTH)
-
-    def request_token(self, authorization_response: str,
-                      client_secret: str) -> None:
-
-        token = self.__oauth.fetch_token(
-            SOMFY_TOKEN,
-            authorization_response=authorization_response,
-            client_secret=client_secret)
-
-        self.__session['oauth_token'] = token
-        self.__session['client_secret'] = client_secret
-
-    def automatic_refresh(self):
-        """Refreshing an OAuth 2 token using a refresh token."""
-        token = self.__session['oauth_token']
+        self.client_id = client_id
+        self.client_secret = client_secret
+        self.cache_path = cache_path
+        self.token = None
 
         extra = {
-            'client_id': self.__session['client_id'],
-            'client_secret': self.__session['client_secret'],
+            'client_id': self.client_id,
+            'client_secret': self.client_secret,
         }
 
-        def token_updater(the_token):
-            self.__session['oauth_token'] = the_token
+        def token_setter(token):
+            self.token = token
 
-        self.__oauth = OAuth2Session(self.__session['client_id'],
-                                     token=token,
-                                     auto_refresh_kwargs=extra,
-                                     auto_refresh_url=SOMFY_REFRESH,
-                                     token_updater=token_updater)
+        self._oauth = OAuth2Session(client_id=client_id,
+                                    token=self.token,
+                                    redirect_uri=redirect_uri,
+                                    auto_refresh_kwargs=extra,
+                                    auto_refresh_url=SOMFY_REFRESH,
+                                    token_updater=token_setter)
+
+    def get_authorization_url(self) -> Tuple[str, str]:
+        return self._oauth.authorization_url(SOMFY_OAUTH)
+
+    def request_token(self, authorization_response: str) -> None:
+        self.token = self._oauth.fetch_token(
+            SOMFY_TOKEN,
+            authorization_response=authorization_response,
+            client_secret=self.client_secret)
+
+    @property
+    def token(self) -> str:
+        token = self._token
+        if self.cache_path:
+            try:
+                with open(self.cache_path, 'r') as cache:
+                    token = json.loads(cache.read())
+            except IOError:
+                pass
+        return token
+
+    @token.setter
+    def token(self, token: str) -> None:
+        self._token = token
+        if self.cache_path and token:
+            with open(self.cache_path, 'w') as cache:
+                cache.write(json.dumps(token))
 
     def get_sites(self) -> List[Site]:
-        r = self.__oauth.get(BASE_URL + '/site')
+        r = self._oauth.get(BASE_URL + '/site')
         return [Site(s) for s in r.json()]
 
     def get_site(self, site_id: str) -> Site:
-        r = self.__oauth.get(BASE_URL + '/site/' + site_id)
+        r = self._oauth.get(BASE_URL + '/site/' + site_id)
         return Site(r.json())
 
     def send_command(self, device_id: str,
                      command: Union[Command, str]) -> str:
         if isinstance(command, str):
             command = Command(command)
-        r = self.__oauth.post(BASE_URL + '/device/' + device_id + '/exec',
-                              json=command)
+        r = self._oauth.post(BASE_URL + '/device/' + device_id + '/exec',
+                             json=command)
         return r.json().get('job_id')
 
     def get_devices(self, site_id: Optional[str] = None,
@@ -74,12 +88,12 @@ class SomfyApi:
             site_id]
         devices = []
         for site_id in site_ids:
-            r = self.__oauth.get(BASE_URL + '/site/' + site_id + "/device")
+            r = self._oauth.get(BASE_URL + '/site/' + site_id + "/device")
             devices += [Device(d) for d in r.json() if
                         category is None or category.value in Device(
                             d).categories]
         return devices
 
     def get_device(self, device_id) -> Device:
-        r = self.__oauth.get(BASE_URL + '/device/' + device_id)
+        r = self._oauth.get(BASE_URL + '/device/' + device_id)
         return Device(r.json())
