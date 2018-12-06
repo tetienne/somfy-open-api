@@ -1,4 +1,6 @@
 ### Next release
+* ...
+### 0.4.0
 * Implicit automatic token refresh
 ### 0.3.2
 * Fix Thermostat class name
