@@ -1,5 +1,7 @@
 ### Next release
 * ...
+### 0.4.1
+* Fix command always rejected
 ### 0.4.0
 * Implicit automatic token refresh
 ### 0.3.2
