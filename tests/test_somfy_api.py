@@ -73,3 +73,10 @@ class TestSomfyApi:
         assert device.states[0].name == 'position'
         assert device.states[0].value == 50
         assert device.states[0].type == 'integer'
+
+    @httpretty.activate
+    def test_send_command(self):
+        url = BASE_URL + '/device/my-id/exec'
+        httpretty.register_uri(httpretty.POST, url, body='{"job_id": "9"}')
+        # Exception must not be raised
+        assert '9' == self.api.send_command('my-id', 'open')

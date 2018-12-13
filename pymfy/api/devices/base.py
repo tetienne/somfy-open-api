@@ -15,7 +15,8 @@ class SomfyDevice:
         self.device = self.api.get_device(self.device.id)
 
     def send_command(self, command: Command) -> None:
-        if command.name in self.device.capabilities:
+        if command.name in [capability.name for capability in
+                            self.device.capabilities]:
             self.api.send_command(self.device.id, command)
         else:
             message_template = 'Command {} not available. ' \
