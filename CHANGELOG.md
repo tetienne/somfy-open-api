@@ -1,5 +1,7 @@
 ### Next release
 * ...
+### 0.4.2
+* Raise an HTTPError when Somfy API returns a status code not ok 
 ### 0.4.1
 * Fix command always rejected
 ### 0.4.0

@@ -68,10 +68,12 @@ class SomfyApi:
 
     def get_sites(self) -> List[Site]:
         r = self._oauth.get(BASE_URL + '/site')
+        r.raise_for_status()
         return [Site(s) for s in r.json()]
 
     def get_site(self, site_id: str) -> Site:
         r = self._oauth.get(BASE_URL + '/site/' + site_id)
+        r.raise_for_status()
         return Site(r.json())
 
     def send_command(self, device_id: str,
@@ -80,6 +82,7 @@ class SomfyApi:
             command = Command(command)
         r = self._oauth.post(BASE_URL + '/device/' + device_id + '/exec',
                              json=command)
+        r.raise_for_status()
         return r.json().get('job_id')
 
     def get_devices(self, site_id: Optional[str] = None,
@@ -89,11 +92,13 @@ class SomfyApi:
         devices = []
         for site_id in site_ids:
             r = self._oauth.get(BASE_URL + '/site/' + site_id + "/device")
+            r.raise_for_status()
             devices += [Device(d) for d in r.json() if
                         category is None or category.value in Device(
                             d).categories]
         return devices
 
-    def get_device(self, device_id) -> Device:
+    def get_device(self, device_id: str) -> Device:
         r = self._oauth.get(BASE_URL + '/device/' + device_id)
+        r.raise_for_status()
         return Device(r.json())
