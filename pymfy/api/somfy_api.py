@@ -42,10 +42,18 @@ class SomfyApi:
     def get_authorization_url(self) -> Tuple[str, str]:
         return self._oauth.authorization_url(SOMFY_OAUTH)
 
-    def request_token(self, authorization_response: str) -> None:
+    def request_token(self, authorization_response: Optional[str] = None,
+                      code: Optional[str] = None) -> None:
+        """Generic method for fetching a Somfy access token.
+
+        :param authorization_response: Authorization response URL, the callback
+                                       URL of the request back to you.
+        :param code: Authorization code
+        """
         self.token = self._oauth.fetch_token(
             SOMFY_TOKEN,
             authorization_response=authorization_response,
+            code=code,
             client_secret=self.client_secret)
 
     @property
