@@ -11,6 +11,7 @@
 This library is an attempt to implement the entire Somfy API in Python 3.
 Documentation for the Somfy API can be found [here](https://developer.somfy.com/somfy-open-api/apis).
 
+
 ## Get developer credentials
 
 1. Vist https://developer.somfy.com
@@ -18,6 +19,16 @@ Documentation for the Somfy API can be found [here](https://developer.somfy.com/
 3. Open the *My Apps* menu
 4. Add a new App (for testing, redirect url can be anything in https)
 4. Plug in your details into the test script below.
+
+## Supported devices
+Somfy currently exposes the following type of devices:
+  - [Blinds](https://developer.somfy.com/products/blinds-interior-and-exterior)
+  - [Rolling shutters](https://developer.somfy.com/products/rolling-shutters)
+  - [Cameras](https://developer.somfy.com/products/cameras)
+  - [Connected Thermostat](https://developer.somfy.com/products/connected-thermostat)
+  
+If you find on this [page](https://developer.somfy.com/products-services-informations) devices not yet handle by this
+repository, don't hesitate to open an issue.
 
 ## Example usage
 
