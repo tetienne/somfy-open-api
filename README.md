@@ -31,9 +31,9 @@ from pymfy.api.devices.roller_shutter import RollerShutter
 from pymfy.api.somfy_api import SomfyApi
 from pymfy.api.devices.category import Category
 
-client_id = r'<CLIENT_ID>'
-redir_url = '<REDIR_URL>'
-secret = r'<secret>'
+client_id = r'<CLIENT_ID>' # Consumer Key
+redir_url = '<REDIR_URL>' # Callback URL (for testing, can be anything)
+secret = r'<secret>' # Consumer Secret
 
 cache_path = '/optional/cache/path'
 api = SomfyApi(client_id, secret, redir_url, cache_path)
@@ -61,9 +61,9 @@ import json
 import re
 from urllib.parse import urlparse, parse_qs
 
-client_id = r'<CLIENT_ID>'
-redir_url = '<REDIR_URL>'
-secret = r'<secret>'
+client_id = r'<CLIENT_ID>' # Consumer Key
+redir_url = '<REDIR_URL>' # Callback URL (for testing, can be anything)
+secret = r'<secret>' # Consumer Secret
 
 from pymfy.api.somfy_api import SomfyApi
 
