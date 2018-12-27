@@ -25,6 +25,7 @@ Print all covers name.
 
 ```python
 import os
+from urllib.parse import urlparse, parse_qs
 
 from pymfy.api.devices.roller_shutter import RollerShutter
 from pymfy.api.somfy_api import SomfyApi
@@ -37,10 +38,11 @@ secret = r'<secret>'
 cache_path = '/optional/cache/path'
 api = SomfyApi(client_id, secret, redir_url, cache_path)
 if not os.path.isfile(cache_path):
-    authorization_url, state = api.get_authorization_url()
+    authorization_url, _ = api.get_authorization_url()
     print('Please go to {} and authorize access.'.format(authorization_url))
     authorization_response = input('Enter the full callback URL')
-    api.request_token(authorization_response)
+    code = parse_qs(urlparse(authorization_response).query)['code'][0]
+    api.request_token(code=code)
 
 devices = api.get_devices(category=Category.ROLLER_SHUTTER)
 
@@ -57,6 +59,7 @@ If you want to contribute to this repository adding new devices, you can create 
 ```python
 import json
 import re
+from urllib.parse import urlparse, parse_qs
 
 client_id = r'<CLIENT_ID>'
 redir_url = '<REDIR_URL>'
@@ -65,10 +68,11 @@ secret = r'<secret>'
 from pymfy.api.somfy_api import SomfyApi
 
 api = SomfyApi(client_id, secret, redir_url)
-authorization_url, state = api.get_authorization_url()
+authorization_url, _ = api.get_authorization_url()
 print('Please go to {} and authorize access.'.format(authorization_url))
 authorization_response = input('Enter the full callback URL')
-api.request_token(authorization_response)
+code = parse_qs(urlparse(authorization_response).query)['code'][0]
+api.request_token(code=code)
 
 devices = api.get_devices()
 # Remove personal information
