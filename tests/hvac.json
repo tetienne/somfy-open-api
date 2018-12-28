@@ -1,0 +1,142 @@
+[
+  {
+    "id": "device-99",
+    "type": "hvac_programmable_thermostat_wired",
+    "categories": [
+      "hvac"
+    ],
+    "states": [
+      {
+        "name": "ambient_temperature",
+        "value": 23.3,
+        "type": "double"
+      },
+      {
+        "name": "humidity",
+        "value": 40,
+        "type": "double"
+      },
+      {
+        "name": "battery",
+        "value": 93,
+        "type": "integer"
+      },
+      {
+        "name": "hvac_state",
+        "value": "he",
+        "type": "string"
+      },
+      {
+        "name": "regulation_state",
+        "value": "Derogation",
+        "type": "string"
+      },
+      {
+        "name": "target_mode",
+        "value": "at_home",
+        "type": "string"
+      },
+      {
+        "name": "target_temperature",
+        "value": 18,
+        "type": "integer"
+      },
+      {
+        "name": "target_end_date",
+        "value": 1542741962,
+        "type": "integer"
+      },
+      {
+        "name": "target_start_date",
+        "value": 1542734762,
+        "type": "integer"
+      },
+      {
+        "name": "at_home_temperature",
+        "value": 18,
+        "type": "integer"
+      },
+      {
+        "name": "away_temperature",
+        "value": 15,
+        "type": "integer"
+      },
+      {
+        "name": "night_temperature",
+        "value": 15,
+        "type": "integer"
+      },
+      {
+        "name": "frost_protection_temperature",
+        "value": 8,
+        "type": "integer"
+      }
+    ],
+    "capabilities": [
+      {
+        "name": "set_target",
+        "parameters": [
+          {
+            "name": "target_mode",
+            "type": "string"
+          },
+          {
+            "name": "target_temperature",
+            "type": "integer",
+          },
+          {
+            "name": "duration",
+            "type": "integer"
+          },
+          {
+            "name": "duration_type",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "name": "cancel_target",
+        "parameters": []
+      },
+      {
+        "name": "set_at_home_temperature",
+        "parameters": [
+          {
+            "name": "at_home_temperature",
+            "type": "integer"
+          }
+        ]
+      },
+      {
+        "name": "set_away_temperature",
+        "parameters": [
+          {
+            "name": "away_temperature",
+            "type": "integer"
+          }
+        ]
+      },
+      {
+        "name": "set_night_temperature",
+        "parameters": [
+          {
+            "name": "night_temperature",
+            "type": "integer"
+          }
+        ]
+      },
+      {
+        "name": "set_frost_protection_temperature",
+        "parameters": [
+          {
+            "name": "frost_protection_temperature",
+            "type": "integer"
+          }
+        ]
+      }
+    ],
+    "site_id": "site-1",
+    "name": "Salon",
+    "last_status": 1544432025
+  }
+]

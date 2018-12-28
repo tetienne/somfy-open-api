@@ -1,5 +1,3 @@
-from typing import Any
-
 from pymfy.api.devices.base import SomfyDevice
 from pymfy.api.model import Command, Parameter
 
@@ -7,42 +5,31 @@ from pymfy.api.model import Command, Parameter
 class Thermostat(SomfyDevice):
     """Class to represent a thermostat."""
 
-    def get_position(self) -> int:
-        return self.get_state('position') or 0
-
-    def is_closed(self) -> bool:
-        return self.get_position() == 100
-
-    def get_ambient_temperature(self) -> int:
+    def get_ambient_temperature(self) -> float:
         return self.get_state('ambient_temperature')
 
-    def get_humidity(self) -> int:
+    def get_humidity(self) -> float:
         return self.get_state('humidity')
 
     def get_battery(self) -> int:
         return self.get_state('battery')
 
-    # TODO Waiting documentation to know what's the returned type
-    def get_hvac_state(self) -> Any:
+    def get_hvac_state(self) -> str:
         return self.get_state('hvac_state')
 
-    # TODO Waiting documentation to know what's the returned type
-    def get_regulation_state(self) -> Any:
+    def get_regulation_state(self) -> str:
         return self.get_state('regulation_state')
 
-    # TODO Waiting documentation to know what's the returned type
-    def get_target_mode(self) -> Any:
+    def get_target_mode(self) -> str:
         return self.get_state('target_mode')
 
     def get_target_temperature(self) -> int:
         return self.get_state('target_temperature')
 
-    # TODO Waiting documentation to know what's the returned type
-    def get_derogation_end_date(self) -> Any:
+    def get_derogation_end_date(self) -> int:
         return self.get_state('derogation.end_date')
 
-    # TODO Waiting documentation to know what's the returned type
-    def get_derogation_start_date(self) -> Any:
+    def get_derogation_start_date(self) -> int:
         return self.get_state('derogation.start_date')
 
     def get_at_home_temperature(self) -> int:
@@ -57,7 +44,7 @@ class Thermostat(SomfyDevice):
     def get_frost_protection_temperature(self) -> int:
         return self.get_state('frost_protection_temperature')
 
-    def set_target(self, target_mode: Any, target_temperature: int,
+    def set_target(self, target_mode: str, target_temperature: int,
                    duration: int, duration_type: str) -> None:
         parameters = [Parameter('target_mode', target_mode),
                       Parameter('target_temperature', target_temperature),
