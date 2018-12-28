@@ -62,7 +62,7 @@ class TestSomfyApi:
 
     @httpretty.activate
     def test_get_device(self):
-        device_path = os.path.join(CURRENT_DIR, 'get_device.json')
+        device_path = os.path.join(CURRENT_DIR, 'roller_shutter.json')
         with open(device_path, 'r') as get_device:
             httpretty.register_uri(httpretty.GET,
                                    BASE_URL + '/device/device-3',

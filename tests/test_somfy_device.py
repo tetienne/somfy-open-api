@@ -16,7 +16,7 @@ class TestSomfyDevice:
 
     def setup_method(self):
         self.api = SomfyApi('foo', 'faa', 'https://whatever.com')
-        device_path = os.path.join(CURRENT_DIR, 'get_device.json')
+        device_path = os.path.join(CURRENT_DIR, 'roller_shutter.json')
         with open(device_path, 'r') as get_device:
             self.dumb_device = Device(json.loads(get_device.read()))
         self.somfy_device = SomfyDevice(self.dumb_device, self.api)
