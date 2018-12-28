@@ -7,7 +7,7 @@ class Blind(RollerShutter):
 
     @property
     def orientation(self) -> int:
-        return self.get_state('orientation')
+        return self.get_state('orientation') or 0
 
     @orientation.setter
     def orientation(self, value: int) -> None:

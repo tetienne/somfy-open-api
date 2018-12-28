@@ -1,5 +1,6 @@
 ### Next release
 * Use get_state method to get blind orientation
+* Set 0 as orientation when not available for the blind
 ### 0.4.3
 * Token can now be fetch using the code instead of the full authorization response
 ### 0.4.2
