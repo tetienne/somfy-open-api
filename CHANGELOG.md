@@ -1,4 +1,6 @@
 ### Next release
+* ...
+### 0.4.4
 * Use get_state method to get blind orientation
 * Set 0 as orientation when not available for the blind
 ### 0.4.3
