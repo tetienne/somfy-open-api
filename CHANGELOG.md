@@ -1,5 +1,6 @@
 ### Next release
-* ...
+* Expose token updater method
+* Remove default token updater (token save as file)
 ### 0.4.4
 * Use get_state method to get blind orientation
 * Set 0 as orientation when not available for the blind
