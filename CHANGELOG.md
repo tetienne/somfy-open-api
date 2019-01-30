@@ -1,4 +1,6 @@
 ### Next release
+* 
+### 0.5.0
 * Expose token updater method
 * Remove default token updater (token save as file)
 ### 0.4.4
