@@ -1,5 +1,7 @@
 ### Next release
-* 
+*
+### 0.5.1
+*  Made redirect uri optional
 ### 0.5.0
 * Expose token updater method
 * Remove default token updater (token save as file)

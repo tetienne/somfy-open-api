@@ -15,7 +15,8 @@ SOMFY_REFRESH = 'https://accounts.somfy.com/oauth/oauth/v2/token'
 class SomfyApi:
     __slots__ = '_oauth', 'client_id', 'client_secret'
 
-    def __init__(self, client_id: str, client_secret: str, redirect_uri: str,
+    def __init__(self, client_id: str, client_secret: str,
+                 redirect_uri: Optional[str] = None,
                  token: Optional[Dict[str, str]] = None,
                  token_updater: Optional[Callable[[str], None]] = None):
 
