@@ -8,7 +8,7 @@ class RollerShutter(SomfyDevice):
     """Class to represent a roller shutter."""
 
     def get_position(self) -> int:
-        return self.get_state('position') or 0
+        return self.get_state('position')
 
     def set_position(self, value: int,
                      low_speed: Optional[int] = False) -> None:
