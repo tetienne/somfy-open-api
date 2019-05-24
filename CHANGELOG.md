@@ -1,5 +1,6 @@
-### Next release
-*
+### 0.5.2
+* Remove some workaround due to Somfy limitation
+* Allow to provide state during OAuth process
 ### 0.5.1
 *  Made redirect uri optional
 ### 0.5.0

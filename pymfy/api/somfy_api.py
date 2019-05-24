@@ -35,8 +35,8 @@ class SomfyApi:
                                     auto_refresh_url=SOMFY_REFRESH,
                                     token_updater=token_updater)
 
-    def get_authorization_url(self) -> Tuple[str, str]:
-        return self._oauth.authorization_url(SOMFY_OAUTH)
+    def get_authorization_url(self, state: Optional[str] = None) -> Tuple[str, str]:
+        return self._oauth.authorization_url(SOMFY_OAUTH, state)
 
     def request_token(self, authorization_response: Optional[str] = None,
                       code: Optional[str] = None) -> Dict[str, str]:
