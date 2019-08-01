@@ -20,7 +20,7 @@ REQUIRES_PYTHON = '>=3.4'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-    'requests-oauthlib', 'typing'
+    'requests-oauthlib', 'typing;python_version<"3.5"'
 ]
 
 EXTRAS = {}
