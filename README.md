@@ -6,6 +6,7 @@
     <a href="https://travis-ci.org/tetienne/somfy-open-api"><img src="https://img.shields.io/travis/tetienne/somfy-open-api.svg"/></a>
     <a href="https://codeclimate.com/github/tetienne/somfy-open-api/maintainability"><img src="https://api.codeclimate.com/v1/badges/efefe25b6c0dc796bc1c/maintainability" /></a>
     <a href="https://codeclimate.com/github/tetienne/somfy-open-api/test_coverage"><img src="https://api.codeclimate.com/v1/badges/efefe25b6c0dc796bc1c/test_coverage" /></a>
+    <a href="https://paypal.me/ThibautE"><img src="https://img.shields.io/badge/Donate-PayPal-green.svg"/></a>
 </p>
  
 This library is an attempt to implement the entire Somfy API in Python 3.
