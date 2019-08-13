@@ -32,6 +32,8 @@ script:
   - tox -- --cov-report xml
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - pip install codecov
+  - codecov
 deploy:
   - provider: pypi
     user: tetienne
