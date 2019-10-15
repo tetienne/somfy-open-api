@@ -1,3 +1,4 @@
+from abc import ABC, abstractmethod
 from typing import Tuple, List, Optional, Union, Callable, Dict
 
 from requests_oauthlib import OAuth2Session
@@ -12,17 +13,17 @@ SOMFY_TOKEN = 'https://accounts.somfy.com/oauth/oauth/v2/token'
 SOMFY_REFRESH = 'https://accounts.somfy.com/oauth/oauth/v2/token'
 
 
-class AbstractSomfyApi:
+class AbstractSomfyApi(ABC):
 
     base_url = BASE_URL
 
+    @abstractmethod
     def get(self, path):
         """Fetch a URL from the Somfy API."""
-        raise NotImplementedError
 
+    @abstractmethod
     def post(self, path, *, json):
         """Post data to the Somfy API."""
-        raise NotImplementedError
 
     def get_sites(self) -> List[Site]:
         r = self.get('/site')
