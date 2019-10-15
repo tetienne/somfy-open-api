@@ -1,3 +1,6 @@
+### 0.6.0
+* Remove typing library for Python 3.5+
+* Made get and post methods abstract to allow custom implementations
 ### 0.5.2
 * Remove some workaround due to Somfy limitation
 * Allow to provide state during OAuth process
