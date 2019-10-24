@@ -1,5 +1,6 @@
 from typing import Tuple, List, Optional, Union, Callable, Dict
 
+from requests import Response
 from requests_oauthlib import OAuth2Session
 from oauthlib.oauth2 import TokenExpiredError
 
@@ -13,7 +14,7 @@ SOMFY_TOKEN = 'https://accounts.somfy.com/oauth/oauth/v2/token'
 SOMFY_REFRESH = 'https://accounts.somfy.com/oauth/oauth/v2/token'
 
 
-class SomfyApi():
+class SomfyApi:
 
     def __init__(self, client_id: str, client_secret: str,
                  redirect_uri: Optional[str] = None,
@@ -71,11 +72,11 @@ class SomfyApi():
         r.raise_for_status()
         return Device(r.json())
 
-    def get(self, path):
+    def get(self, path: str) -> Response:
         """Fetch a URL from the Somfy API."""
         return self._request('get', path)
 
-    def post(self, path, *, json):
+    def post(self, path: str, *, json: dict) -> Response:
         """Post data to the Somfy API."""
         return self._request('post', path, json=json)
 
@@ -97,7 +98,7 @@ class SomfyApi():
             code=code,
             client_secret=self.client_secret)
 
-    def refresh_tokens(self) -> dict:
+    def refresh_tokens(self) -> dict[str, Union[str, int]]:
         """Refresh and return new Somfy tokens."""
         token = self._oauth.refresh_token(SOMFY_REFRESH)
 
@@ -106,7 +107,7 @@ class SomfyApi():
 
         return token
 
-    def _request(self, method, path, **kwargs):
+    def _request(self, method: str, path: str, **kwargs) -> Response:
         """Make a request.
 
         We don't use the built-in token refresh mechanism of OAuth2 session because
