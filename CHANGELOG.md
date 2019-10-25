@@ -1,3 +1,6 @@
+### 0.6.1
+* No more abstract class
+* Don't use the built-in token refresh mechanism of OAuth2 session to allow overriding the token refresh logic
 ### 0.6.0
 * Remove typing library for Python 3.5+
 * Made get and post methods abstract to allow custom implementations
