@@ -29,7 +29,7 @@ before_script:
 install:
   - pip install tox
 script:
-  - tox
+  - tox -- --cov-report xml
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 deploy:
