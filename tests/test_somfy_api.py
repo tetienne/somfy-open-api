@@ -1,4 +1,3 @@
-import json
 import os
 
 import httpretty
@@ -102,7 +101,7 @@ class TestSomfyApi:
         assert "9" == api.send_command("my-id", command)
         assert httpretty.last_request().parsed_body == {
             "name": "position",
-            "parameters": [{"name": "position", "value": 10},],
+            "parameters": [{"name": "position", "value": 10}],
         }
 
         command = Command("close")
