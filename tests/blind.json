@@ -1,0 +1,62 @@
+{
+  "id": "xxxxxx",
+  "type": "exterior_blind_positionable_orientable_stateful_generic",
+  "parent_id": "xxxxxxxxxxxx",
+  "categories": [
+    "exterior_blind"
+  ],
+  "states": [
+    {
+      "name": "orientation",
+      "value": 78,
+      "type": "integer"
+    },
+    {
+      "name": "position",
+      "type": "integer"
+    }
+  ],
+  "capabilities": [
+    {
+      "name": "rotation",
+      "parameters": [
+        {
+          "name": "orientation",
+          "type": "integer"
+        }
+      ]
+    },
+    {
+      "name": "position",
+      "parameters": [
+        {
+          "name": "position",
+          "type": "integer"
+        }
+      ]
+    },
+    {
+      "name": "close",
+      "parameters": [
+      ]
+    },
+    {
+      "name": "identify",
+      "parameters": [
+      ]
+    },
+    {
+      "name": "open",
+      "parameters": [
+      ]
+    },
+    {
+      "name": "stop",
+      "parameters": [
+      ]
+    }
+  ],
+  "site_id": "xxxxxxxx",
+  "name": "okno dol",
+  "available": true
+}

@@ -1,0 +1,45 @@
+{
+  "id": "device-3",
+  "type": "roller_shutter_positionable_stateful_generic",
+  "parent_id": "parent-1",
+  "categories": [
+    "roller_shutter"
+  ],
+  "states": [
+    {
+      "name": "position",
+      "value": 70,
+      "type": "integer"
+    }
+  ],
+  "capabilities": [
+    {
+      "name": "position",
+      "parameters": [
+        {
+          "name": "position",
+          "type": "integer"
+        }
+      ]
+    },
+    {
+      "name": "close",
+      "parameters": []
+    },
+    {
+      "name": "identify",
+      "parameters": []
+    },
+    {
+      "name": "open",
+      "parameters": []
+    },
+    {
+      "name": "stop",
+      "parameters": []
+    }
+  ],
+  "site_id": "site-2",
+  "name": "Room 3",
+  "available": true
+}
