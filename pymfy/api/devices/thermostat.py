@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from pymfy.api.devices.base import SomfyDevice
 from pymfy.api.model import Command, Parameter
 
@@ -26,11 +28,11 @@ class Thermostat(SomfyDevice):
     def get_target_temperature(self) -> int:
         return self.get_state("target_temperature")
 
-    def get_derogation_end_date(self) -> int:
-        return self.get_state("derogation.end_date")
+    def get_target_end_date(self) -> datetime:
+        return datetime.utcfromtimestamp(self.get_state("target_end_date"))
 
-    def get_derogation_start_date(self) -> int:
-        return self.get_state("derogation.start_date")
+    def get_target_start_date(self) -> datetime:
+        return datetime.utcfromtimestamp(self.get_state("target_start_date"))
 
     def get_at_home_temperature(self) -> int:
         return self.get_state("at_home_temperature")
