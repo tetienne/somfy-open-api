@@ -12,7 +12,6 @@ CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 class TestSomfyApi:
-
     @fixture
     def api(self):
         return SomfyApi("foo", "faa", "https://whatever.com")
@@ -46,7 +45,7 @@ class TestSomfyApi:
         devices_path_1 = os.path.join(CURRENT_DIR, "get_devices_1.json")
         devices_path_2 = os.path.join(CURRENT_DIR, "get_devices_2.json")
         with open(sites_path, "r") as get_sites, open(
-                devices_path_1, "r"
+            devices_path_1, "r"
         ) as get_devices_1, open(devices_path_2, "r") as get_devices_2:
             httpretty.register_uri(
                 httpretty.GET, BASE_URL + "/site", body=get_sites.read()
@@ -87,7 +86,9 @@ class TestSomfyApi:
         url = BASE_URL + "/device/my-id/exec"
         httpretty.register_uri(httpretty.POST, url, body='{"job_id": "9"}')
 
-        command = Command("position", [Parameter("position", 10), Parameter("speed", "slow")])
+        command = Command(
+            "position", [Parameter("position", 10), Parameter("speed", "slow")]
+        )
         assert "9" == api.send_command("my-id", command)
         assert json.loads(httpretty.last_request().body) == {
             "name": "position",
@@ -101,14 +102,18 @@ class TestSomfyApi:
         assert "9" == api.send_command("my-id", command)
         assert json.loads(httpretty.last_request().body) == {
             "name": "position",
-            "parameters": [
-                {"name": "position", "value": 10},
-            ],
+            "parameters": [{"name": "position", "value": 10},],
         }
 
         command = Command("close")
         assert "9" == api.send_command("my-id", command)
-        assert json.loads(httpretty.last_request().body) == {"name": "close", "parameters": []}
+        assert json.loads(httpretty.last_request().body) == {
+            "name": "close",
+            "parameters": [],
+        }
 
         assert "9" == api.send_command("my-id", "close")
-        assert json.loads(httpretty.last_request().body) == {"name": "close", "parameters": []}
+        assert json.loads(httpretty.last_request().body) == {
+            "name": "close",
+            "parameters": [],
+        }
