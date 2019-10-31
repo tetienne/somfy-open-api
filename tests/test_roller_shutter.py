@@ -28,7 +28,7 @@ class TestRollerShutter:
         url = BASE_URL + "/device/device-3/exec"
         httpretty.register_uri(httpretty.POST, url, body='{"job_id": "9"}')
         device.set_position(78)
-        assert json.loads(httpretty.last_request().body) == {
+        assert httpretty.last_request().parsed_body == {
             "name": "position",
             "parameters": [{"name": "position", "value": 78}],
         }

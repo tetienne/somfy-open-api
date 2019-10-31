@@ -31,7 +31,7 @@ class TestSomfyDevice:
         httpretty.register_uri(httpretty.POST, url)
         # Exception must not be raised
         device.send_command(Command("open"))
-        assert json.loads(httpretty.last_request().body) == {
+        assert httpretty.last_request().parsed_body == {
             "name": "open",
             "parameters": [],
         }

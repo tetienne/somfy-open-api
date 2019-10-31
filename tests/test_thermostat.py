@@ -66,7 +66,7 @@ class TestThermostat:
     def test_set_target(self, device):
         httpretty.register_uri(httpretty.POST, URL, body='{"job_id": "9"}')
         device.set_target("at_home", 18, 10, "h")
-        assert json.loads(httpretty.last_request().body) == {
+        assert httpretty.last_request().parsed_body == {
             "name": "set_target",
             "parameters": [
                 {"name": "target_mode", "value": "at_home"},
@@ -79,7 +79,7 @@ class TestThermostat:
     def test_cancel_target(self, device):
         httpretty.register_uri(httpretty.POST, URL, body='{"job_id": "9"}')
         device.cancel_target()
-        assert json.loads(httpretty.last_request().body) == {
+        assert httpretty.last_request().parsed_body == {
             "name": "cancel_target",
             "parameters": [],
         }
@@ -87,7 +87,7 @@ class TestThermostat:
     def test_set_at_home_temperature(self, device):
         httpretty.register_uri(httpretty.POST, URL, body='{"job_id": "9"}')
         device.set_at_home_temperature(10)
-        assert json.loads(httpretty.last_request().body) == {
+        assert httpretty.last_request().parsed_body == {
             "name": "set_at_home_temperature",
             "parameters": [{"name": "at_home_temperature", "value": 10}],
         }
@@ -95,7 +95,7 @@ class TestThermostat:
     def test_set_away_temperature(self, device):
         httpretty.register_uri(httpretty.POST, URL, body='{"job_id": "9"}')
         device.set_away_temperature(12)
-        assert json.loads(httpretty.last_request().body) == {
+        assert httpretty.last_request().parsed_body == {
             "name": "set_away_temperature",
             "parameters": [{"name": "away_temperature", "value": 12}],
         }
@@ -103,7 +103,7 @@ class TestThermostat:
     def test_set_night_temperature(self, device):
         httpretty.register_uri(httpretty.POST, URL, body='{"job_id": "9"}')
         device.set_night_temperature(13)
-        assert json.loads(httpretty.last_request().body) == {
+        assert httpretty.last_request().parsed_body == {
             "name": "set_night_temperature",
             "parameters": [{"name": "night_temperature", "value": 13}],
         }
@@ -111,7 +111,7 @@ class TestThermostat:
     def test_set_frost_protection_temperature(self, device):
         httpretty.register_uri(httpretty.POST, URL, body='{"job_id": "9"}')
         device.set_frost_protection_temperature(8)
-        assert json.loads(httpretty.last_request().body) == {
+        assert httpretty.last_request().parsed_body == {
             "name": "set_frost_protection_temperature",
             "parameters": [{"name": "frost_protection_temperature", "value": 8}],
         }

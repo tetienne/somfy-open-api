@@ -90,7 +90,7 @@ class TestSomfyApi:
             "position", [Parameter("position", 10), Parameter("speed", "slow")]
         )
         assert "9" == api.send_command("my-id", command)
-        assert json.loads(httpretty.last_request().body) == {
+        assert httpretty.last_request().parsed_body == {
             "name": "position",
             "parameters": [
                 {"name": "position", "value": 10},
@@ -100,20 +100,20 @@ class TestSomfyApi:
 
         command = Command("position", Parameter("position", 10))
         assert "9" == api.send_command("my-id", command)
-        assert json.loads(httpretty.last_request().body) == {
+        assert httpretty.last_request().parsed_body == {
             "name": "position",
             "parameters": [{"name": "position", "value": 10},],
         }
 
         command = Command("close")
         assert "9" == api.send_command("my-id", command)
-        assert json.loads(httpretty.last_request().body) == {
+        assert httpretty.last_request().parsed_body == {
             "name": "close",
             "parameters": [],
         }
 
         assert "9" == api.send_command("my-id", "close")
-        assert json.loads(httpretty.last_request().body) == {
+        assert httpretty.last_request().parsed_body == {
             "name": "close",
             "parameters": [],
         }
