@@ -2,15 +2,19 @@ import json
 import os
 from datetime import datetime
 
+import httpretty
 from pytest import fixture
 
 from pymfy.api.devices.thermostat import Thermostat
 from pymfy.api.model import Device
-from pymfy.api.somfy_api import SomfyApi
+from pymfy.api.somfy_api import SomfyApi, BASE_URL
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
+URL = BASE_URL + "/device/device-99/exec"
 
+
+@httpretty.activate
 class TestThermostat:
     @fixture(scope="class")
     def device(self):
@@ -58,3 +62,56 @@ class TestThermostat:
 
     def test_get_frost_protection_temperature(self, device):
         assert device.get_frost_protection_temperature() == 8
+
+    def test_set_target(self, device):
+        httpretty.register_uri(httpretty.POST, URL, body='{"job_id": "9"}')
+        device.set_target("at_home", 18, 10, "h")
+        assert json.loads(httpretty.last_request().body) == {
+            "name": "set_target",
+            "parameters": [
+                {"name": "target_mode", "value": "at_home"},
+                {"name": "target_temperature", "value": 18},
+                {"name": "duration", "value": 10},
+                {"name": "duration_type", "value": "h"},
+            ],
+        }
+
+    def test_cancel_target(self, device):
+        httpretty.register_uri(httpretty.POST, URL, body='{"job_id": "9"}')
+        device.cancel_target()
+        assert json.loads(httpretty.last_request().body) == {
+            "name": "cancel_target",
+            "parameters": [],
+        }
+
+    def test_set_at_home_temperature(self, device):
+        httpretty.register_uri(httpretty.POST, URL, body='{"job_id": "9"}')
+        device.set_at_home_temperature(10)
+        assert json.loads(httpretty.last_request().body) == {
+            "name": "set_at_home_temperature",
+            "parameters": [{"name": "at_home_temperature", "value": 10}],
+        }
+
+    def test_set_away_temperature(self, device):
+        httpretty.register_uri(httpretty.POST, URL, body='{"job_id": "9"}')
+        device.set_away_temperature(12)
+        assert json.loads(httpretty.last_request().body) == {
+            "name": "set_away_temperature",
+            "parameters": [{"name": "away_temperature", "value": 12}],
+        }
+
+    def test_set_night_temperature(self, device):
+        httpretty.register_uri(httpretty.POST, URL, body='{"job_id": "9"}')
+        device.set_night_temperature(13)
+        assert json.loads(httpretty.last_request().body) == {
+            "name": "set_night_temperature",
+            "parameters": [{"name": "night_temperature", "value": 13}],
+        }
+
+    def test_set_frost_protection_temperature(self, device):
+        httpretty.register_uri(httpretty.POST, URL, body='{"job_id": "9"}')
+        device.set_frost_protection_temperature(8)
+        assert json.loads(httpretty.last_request().body) == {
+            "name": "set_frost_protection_temperature",
+            "parameters": [{"name": "frost_protection_temperature", "value": 8}],
+        }
