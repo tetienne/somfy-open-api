@@ -8,11 +8,11 @@ class CameraProtect(SomfyDevice):
     """Class to represent a camera"""
 
     def close_shutter(self) -> None:
-        self.send_command(Command('close'))
+        self.send_command(Command("close"))
 
     def open_shutter(self) -> None:
-        self.send_command(Command('open'))
+        self.send_command(Command("open"))
 
     # TODO Waiting documentation to know what's the returned type
     def get_shutter_position(self) -> Any:
-        return self.get_state('shutter_position')
+        return self.get_state("shutter_position")

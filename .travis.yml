@@ -2,18 +2,30 @@ env:
   global:
     - CC_TEST_REPORTER_ID=3cd3f4810dc2d510557d2100005fd5e5497683d44f7f56b6fcd1633c3335f46b
 language: python
-python:
-  - 3.4
-  - 3.5
-  - 3.6
-  - 3.7
+matrix:
+  include:
+    - python: 3.7
+      env: TOXENV=flake8
+    - python: 3.7
+      env: TOXENV=black
+    - python: 3.4
+      env: TOXENV=py34
+    - python: 3.5
+      env: TOXENV=py35
+    - python: 3.6
+      env: TOXENV=py36
+    - python: 3.7
+      env: TOXENV=py37
+    - python: 3.8
+      env: TOXENV=py38
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
+install:
+  - pip install tox
 script:
- - flake8
- - pytest --cov=pymfy --cov-report xml
+  - tox
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 deploy:
