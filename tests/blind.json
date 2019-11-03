@@ -13,7 +13,8 @@
     },
     {
       "name": "position",
-      "type": "integer"
+      "type": "integer",
+      "value": 10
     }
   ],
   "capabilities": [
