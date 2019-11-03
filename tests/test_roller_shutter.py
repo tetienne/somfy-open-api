@@ -17,7 +17,7 @@ class TestRollerShutter:
         api = SomfyApi("foo", "faa", "https://whatever.com")
         device_path = os.path.join(CURRENT_DIR, "roller_shutter.json")
         with open(device_path, "r") as get_device:
-            device = Device(json.loads(get_device.read()))
+            device = Device(**json.loads(get_device.read()))
         return RollerShutter(device, api)
 
     def test_get_position(self, device):

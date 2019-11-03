@@ -17,7 +17,7 @@ class TestBlind:
         api = SomfyApi("foo", "faa", "https://whatever.com")
         device_path = os.path.join(CURRENT_DIR, "blind.json")
         with open(device_path, "r") as get_device:
-            device = Device(json.loads(get_device.read()))
+            device = Device(**json.loads(get_device.read()))
         return Blind(device, api)
 
     def test_get_orientation(self, device):

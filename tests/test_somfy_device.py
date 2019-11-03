@@ -18,7 +18,7 @@ class TestSomfyDevice:
         api = SomfyApi("foo", "faa", "https://whatever.com")
         device_path = os.path.join(CURRENT_DIR, "roller_shutter.json")
         with open(device_path, "r") as get_device:
-            dumb_device = Device(json.loads(get_device.read()))
+            dumb_device = Device(**json.loads(get_device.read()))
         return SomfyDevice(dumb_device, api)
 
     def test_unsupported_command(self, device):

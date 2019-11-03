@@ -64,16 +64,16 @@ class SomfyApi:
             r = self.get("/site/" + site_id + "/device")
             r.raise_for_status()
             devices += [
-                Device(d)
+                Device(**d)
                 for d in r.json()
-                if category is None or category.value in Device(d).categories
+                if category is None or category.value in Device(**d).categories
             ]
         return devices
 
     def get_device(self, device_id: str) -> Device:
         r = self.get("/device/" + device_id)
         r.raise_for_status()
-        return Device(r.json())
+        return Device(**r.json())
 
     def get(self, path: str) -> Response:
         """Fetch a URL from the Somfy API."""

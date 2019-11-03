@@ -1,4 +1,4 @@
-from typing import Dict, Union, List, Any
+from typing import Dict, Union, List, Optional
 
 
 class Site:
@@ -12,39 +12,50 @@ class Site:
 class Device:
     __slots__ = "id", "name", "type", "site_id", "states", "capabilities", "categories"
 
-    def __init__(self, json: Dict[str, Any]):
-        self.id = json.get("id")
-        self.name = json.get("name")
-        self.type = json.get("type")
-        self.site_id = json.get("site_id")
-        self.categories = json.get("categories")
-        self.states = [State(s) for s in json.get("states")]
-        self.capabilities = [Capability(c) for c in json.get("capabilities")]
+    def __init__(
+        self,
+        *,
+        id: str,
+        type: str,
+        site_id: str,
+        categories: List[str],
+        states: List[Dict[str, str]],
+        capabilities: List[Dict[str, str]],
+        name: Optional[str] = None,
+        **kwargs
+    ):
+        self.id = id
+        self.name = name
+        self.type = type
+        self.site_id = site_id
+        self.categories = categories
+        self.states = [State(**s) for s in states]
+        self.capabilities = [Capability(**c) for c in capabilities]
 
 
 class State:
     __slots__ = "name", "value", "type"
 
-    def __init__(self, json: Dict[str, str]):
-        self.name = json.get("name")
-        self.value = json.get("value")
-        self.type = json.get("type")
+    def __init__(self, name: str, value: Union[str, int], type: str):
+        self.name = name
+        self.value = value
+        self.type = type
 
 
 class Capability:
     __slots__ = "name", "parameters"
 
-    def __init__(self, json: Dict[str, str]):
-        self.name = json.get("name")
-        self.parameters = [ParameterDescription(p) for p in json.get("parameters")]
+    def __init__(self, name: str, parameters: List[Dict[str, str]]):
+        self.name = name
+        self.parameters = [ParameterDescription(**p) for p in parameters]
 
 
 class ParameterDescription:
     __slots__ = "name", "type"
 
-    def __init__(self, json: Dict[str, str]):
-        self.name = json.get("name")
-        self.type = json.get("type")
+    def __init__(self, name: str, type: str):
+        self.name = name
+        self.type = type
 
 
 class Parameter(dict):
