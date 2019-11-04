@@ -12,6 +12,8 @@ matrix:
       env: TOXENV=flake8
     - python: 3.7
       env: TOXENV=black
+    - python: 3.7
+      env: TOXENV=mypy
     - python: 3.4
       env: TOXENV=py34
     - python: 3.5

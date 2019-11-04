@@ -30,7 +30,7 @@ class SomfyDevice:
             )
             raise UnsupportedCommandException(message)
 
-    def get_state(self, state_name) -> Union[str, int]:
+    def get_state(self, state_name: str) -> Union[str, int, float]:
         return next(
             (state.value for state in self.device.states if state.name == state_name)
         )

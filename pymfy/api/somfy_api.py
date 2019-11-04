@@ -1,4 +1,4 @@
-from typing import Tuple, List, Optional, Union, Callable, Dict
+from typing import Tuple, List, Optional, Union, Callable, Dict, Any
 
 from requests import Response
 from requests_oauthlib import OAuth2Session
@@ -41,12 +41,12 @@ class SomfyApi:
     def get_sites(self) -> List[Site]:
         r = self.get("/site")
         r.raise_for_status()
-        return [Site(s) for s in r.json()]
+        return [Site(**s) for s in r.json()]
 
     def get_site(self, site_id: str) -> Site:
         r = self.get("/site/" + site_id)
         r.raise_for_status()
-        return Site(r.json())
+        return Site(**r.json())
 
     def send_command(self, device_id: str, command: Union[Command, str]) -> str:
         if isinstance(command, str):
@@ -59,9 +59,9 @@ class SomfyApi:
         self, site_id: Optional[str] = None, category: Optional[Category] = None
     ) -> List[Device]:
         site_ids = [s.id for s in self.get_sites()] if site_id is None else [site_id]
-        devices = []
-        for site_id in site_ids:
-            r = self.get("/site/" + site_id + "/device")
+        devices: List[Device] = []
+        for s_id in site_ids:
+            r = self.get("/site/" + s_id + "/device")
             r.raise_for_status()
             devices += [
                 Device(**d)
@@ -79,7 +79,7 @@ class SomfyApi:
         """Fetch a URL from the Somfy API."""
         return self._request("get", path)
 
-    def post(self, path: str, *, json: dict) -> Response:
+    def post(self, path: str, *, json: Dict[str, Any]) -> Response:
         """Post data to the Somfy API."""
         return self._request("post", path, json=json)
 
@@ -112,7 +112,7 @@ class SomfyApi:
 
         return token
 
-    def _request(self, method: str, path: str, **kwargs) -> Response:
+    def _request(self, method: str, path: str, **kwargs: Any) -> Response:
         """Make a request.
 
         We don't use the built-in token refresh mechanism of OAuth2 session because

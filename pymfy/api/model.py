@@ -1,12 +1,12 @@
-from typing import Dict, Union, List, Optional
+from typing import Dict, Union, List, Optional, Any
 
 
 class Site:
     __slots__ = "id", "label"
 
-    def __init__(self, json: Dict[str, str]):
-        self.id = json.get("id")
-        self.label = json.get("label")
+    def __init__(self, id: str, label: str):
+        self.id = id
+        self.label = label
 
 
 class Device:
@@ -19,10 +19,10 @@ class Device:
         type: str,
         site_id: str,
         categories: List[str],
-        states: List[Dict[str, str]],
-        capabilities: List[Dict[str, str]],
+        states: List[Dict[str, Any]],
+        capabilities: List[Dict[str, Any]],
         name: Optional[str] = None,
-        **kwargs
+        **kwargs: Any
     ):
         self.id = id
         self.name = name
@@ -58,7 +58,7 @@ class ParameterDescription:
         self.type = type
 
 
-class Parameter(dict):
+class Parameter(dict):  # type: ignore
     __slots__ = "name", "value"
 
     def __init__(self, name: str, value: Union[str, int]):
@@ -67,10 +67,12 @@ class Parameter(dict):
         dict.__init__(self, name=name, value=value)
 
 
-class Command(dict):
+class Command(dict):  # type: ignore
     __slots__ = "name", "parameters"
 
-    def __init__(self, name: str, parameters: Union[List[Parameter], Parameter] = None):
+    def __init__(
+        self, name: str, parameters: Union[List[Parameter], Parameter, None] = None
+    ):
         if parameters is None:
             parameters = []
         if not isinstance(parameters, list):

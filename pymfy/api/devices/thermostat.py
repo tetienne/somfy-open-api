@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import cast
 
 from pymfy.api.devices.base import SomfyDevice
 from pymfy.api.model import Command, Parameter
@@ -8,43 +9,43 @@ class Thermostat(SomfyDevice):
     """Class to represent a thermostat."""
 
     def get_ambient_temperature(self) -> float:
-        return self.get_state("ambient_temperature")
+        return cast(float, self.get_state("ambient_temperature"))
 
     def get_humidity(self) -> float:
-        return self.get_state("humidity")
+        return cast(float, self.get_state("humidity"))
 
     def get_battery(self) -> int:
-        return self.get_state("battery")
+        return cast(int, self.get_state("battery"))
 
     def get_hvac_state(self) -> str:
-        return self.get_state("hvac_state")
+        return cast(str, self.get_state("hvac_state"))
 
     def get_regulation_state(self) -> str:
-        return self.get_state("regulation_state")
+        return cast(str, self.get_state("regulation_state"))
 
     def get_target_mode(self) -> str:
-        return self.get_state("target_mode")
+        return cast(str, self.get_state("target_mode"))
 
     def get_target_temperature(self) -> int:
-        return self.get_state("target_temperature")
+        return cast(int, self.get_state("target_temperature"))
 
     def get_target_end_date(self) -> datetime:
-        return datetime.utcfromtimestamp(self.get_state("target_end_date"))
+        return datetime.utcfromtimestamp(cast(int, self.get_state("target_end_date")))
 
     def get_target_start_date(self) -> datetime:
-        return datetime.utcfromtimestamp(self.get_state("target_start_date"))
+        return datetime.utcfromtimestamp(cast(int, self.get_state("target_start_date")))
 
     def get_at_home_temperature(self) -> int:
-        return self.get_state("at_home_temperature")
+        return cast(int, self.get_state("at_home_temperature"))
 
     def get_away_temperature(self) -> int:
-        return self.get_state("away_temperature")
+        return cast(int, self.get_state("away_temperature"))
 
     def get_night_temperature(self) -> int:
-        return self.get_state("night_temperature")
+        return cast(int, self.get_state("night_temperature"))
 
     def get_frost_protection_temperature(self) -> int:
-        return self.get_state("frost_protection_temperature")
+        return cast(int, self.get_state("frost_protection_temperature"))
 
     def set_target(
         self,
