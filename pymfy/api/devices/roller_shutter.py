@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, cast
 
 from pymfy.api.devices.base import SomfyDevice
 from pymfy.api.model import Command, Parameter
@@ -8,7 +8,7 @@ class RollerShutter(SomfyDevice):
     """Class to represent a roller shutter."""
 
     def get_position(self) -> int:
-        return self.get_state("position")
+        return cast(int, self.get_state("position"))
 
     def set_position(self, value: int, low_speed: Optional[int] = False) -> None:
         command_name = "position_low_speed" if low_speed else "position"
