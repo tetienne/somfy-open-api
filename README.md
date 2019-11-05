@@ -32,6 +32,11 @@ Somfy currently exposes the following type of devices:
 If you find on this [page](https://developer.somfy.com/products-services-informations) devices not yet handle by this
 repository, don't hesitate to open an issue.
 
+## Installation
+```
+pip install pymfy
+```
+
 ## Example usage
 
 Print all covers name.
