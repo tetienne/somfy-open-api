@@ -59,7 +59,7 @@ class SomfyApi:
         self, site_id: Optional[str] = None, category: Optional[Category] = None
     ) -> List[Device]:
         site_ids = [s.id for s in self.get_sites()] if site_id is None else [site_id]
-        devices: List[Device] = []
+        devices = []  # type: List[Device]
         for s_id in site_ids:
             r = self.get("/site/" + s_id + "/device")
             r.raise_for_status()
