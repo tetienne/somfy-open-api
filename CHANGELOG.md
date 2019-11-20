@@ -1,3 +1,5 @@
+### 0.7.0
+* Fix Thermostat: get_derogation_*_date -> get_target_*_date
 ### 0.6.1
 * No more abstract class
 * Don't use the built-in token refresh mechanism of OAuth2 session to allow overriding the token refresh logic
