@@ -51,11 +51,12 @@ class Capability:
 
 
 class ParameterDescription:
-    __slots__ = "name", "type"
+    __slots__ = "name", "type", "condition"
 
-    def __init__(self, name: str, type: str):
+    def __init__(self, name: str, type: str, condition: Optional[str] = None):
         self.name = name
         self.type = type
+        self.condition = condition
 
 
 class Parameter(dict):  # type: ignore

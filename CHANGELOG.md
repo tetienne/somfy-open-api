@@ -1,3 +1,5 @@
+### 0.7.1
+* Support optional condition
 ### 0.7.0
 * Fix Thermostat: get_derogation_*_date -> get_target_*_date
 ### 0.6.1
