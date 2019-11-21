@@ -36,7 +36,7 @@ class Device:
 class State:
     __slots__ = "name", "value", "type"
 
-    def __init__(self, name: str, value: Union[str, int], type: str):
+    def __init__(self, name: str, value: Union[str, int], type: str, **kwargs: Any):
         self.name = name
         self.value = value
         self.type = type
@@ -45,7 +45,7 @@ class State:
 class Capability:
     __slots__ = "name", "parameters"
 
-    def __init__(self, name: str, parameters: List[Dict[str, str]]):
+    def __init__(self, name: str, parameters: List[Dict[str, str]], **kwargs: Any):
         self.name = name
         self.parameters = [ParameterDescription(**p) for p in parameters]
 
@@ -53,7 +53,9 @@ class Capability:
 class ParameterDescription:
     __slots__ = "name", "type", "condition"
 
-    def __init__(self, name: str, type: str, condition: Optional[str] = None):
+    def __init__(
+        self, name: str, type: str, condition: Optional[str] = None, **kwargs: Any
+    ):
         self.name = name
         self.type = type
         self.condition = condition
