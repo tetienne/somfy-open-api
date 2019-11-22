@@ -67,21 +67,29 @@ class Thermostat(SomfyDevice):
         self.send_command(Command("cancel_target"))
 
     def set_at_home_temperature(self, temperature: int) -> None:
+        if abs(temperature) > 999:
+            raise ValueError("temperature must be between -999 and 999")
         parameter = Parameter("at_home_temperature", temperature)
         command = Command("set_at_home_temperature", parameter)
         self.send_command(command)
 
     def set_away_temperature(self, temperature: int) -> None:
+        if abs(temperature) > 999:
+            raise ValueError("temperature must be between -999 and 999")
         parameter = Parameter("away_temperature", temperature)
         command = Command("set_away_temperature", parameter)
         self.send_command(command)
 
     def set_night_temperature(self, temperature: int) -> None:
+        if abs(temperature) > 999:
+            raise ValueError("temperature must be between -999 and 999")
         parameter = Parameter("night_temperature", temperature)
         command = Command("set_night_temperature", parameter)
         self.send_command(command)
 
     def set_frost_protection_temperature(self, temperature: int) -> None:
+        if abs(temperature) > 999:
+            raise ValueError("temperature must be between -999 and 999")
         parameter = Parameter("frost_protection_temperature", temperature)
         command = Command("set_frost_protection_temperature", parameter)
         self.send_command(command)
