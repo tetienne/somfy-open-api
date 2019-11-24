@@ -1,0 +1,26 @@
+{
+  "id": "device-9",
+  "type": "camera_protect_somfyone",
+  "categories": [
+    "camera"
+  ],
+  "states": [
+    {
+      "name": "shutter_position",
+      "value": "opened",
+      "type": "string"
+    }
+  ],
+  "capabilities": [
+    {
+      "name": "shutter_close",
+      "parameters": []
+    },
+    {
+      "name": "shutter_open",
+      "parameters": []
+    }
+  ],
+  "site_id": "site-8",
+  "name": "living"
+}

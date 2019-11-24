@@ -1,6 +1,7 @@
 ### 0.7.1
 * Support optional condition
 * Don't break when new parameters are returned by Somfy
+* Fix camera protect model
 ### 0.7.0
 * Fix Thermostat: get_derogation_*_date -> get_target_*_date
 ### 0.6.1
