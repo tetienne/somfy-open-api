@@ -7,3 +7,4 @@ class Category(Enum):
     HUB = "hub"
     INTERIOR_BLIND = "interior_blind"
     EXTERIOR_BLIND = "exterior_blind"
+    CAMERA = "camera"
