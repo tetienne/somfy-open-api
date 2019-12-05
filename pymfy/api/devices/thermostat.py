@@ -48,11 +48,7 @@ class Thermostat(SomfyDevice):
             return datetime.utcfromtimestamp(cast(int, timestamp))
 
     def get_target_start_date(self) -> Optional[datetime]:
-        timestamp = self.get_state("target_start_date")
-        if timestamp == -1:
-            return None
-        else:
-            return datetime.utcfromtimestamp(cast(int, timestamp))
+        return datetime.utcfromtimestamp(cast(int, self.get_state("target_start_date")))
 
     def get_at_home_temperature(self) -> int:
         return cast(int, self.get_state("at_home_temperature"))
