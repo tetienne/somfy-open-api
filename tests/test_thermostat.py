@@ -5,7 +5,7 @@ from datetime import datetime
 import httpretty
 from pytest import fixture
 
-from pymfy.api.devices.thermostat import Thermostat
+from pymfy.api.devices.thermostat import Thermostat, DurationType, TargetMode
 from pymfy.api.model import Device
 from pymfy.api.somfy_api import SomfyApi, BASE_URL
 
@@ -65,14 +65,14 @@ class TestThermostat:
 
     def test_set_target(self, device):
         httpretty.register_uri(httpretty.POST, URL, body='{"job_id": "9"}')
-        device.set_target("at_home", 18, 10, "h")
+        device.set_target(TargetMode.AT_HOME, 18, DurationType.FURTHER_NOTICE, 10)
         assert httpretty.last_request().parsed_body == {
             "name": "set_target",
             "parameters": [
                 {"name": "target_mode", "value": "at_home"},
                 {"name": "target_temperature", "value": 18},
+                {"name": "duration_type", "value": "further_notice"},
                 {"name": "duration", "value": 10},
-                {"name": "duration_type", "value": "h"},
             ],
         }
 
