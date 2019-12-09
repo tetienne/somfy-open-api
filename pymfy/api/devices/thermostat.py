@@ -9,12 +9,18 @@ from pymfy.api.model import Command, Parameter
 class TargetMode(Enum):
     AWAY = "away"
     AT_HOME = "at_home"
+    FROST_PROTECTION = "frost_protection"
+    MANUEL = "manuel"
+    SLEEP = "sleep"
 
 
 class DurationType(Enum):
     FURTHER_NOTICE = "further_notice"
     NEXT_MODE = "next_mode"
 
+class RegulationState(Enum):
+    DEROGATION = "Derogation"
+    TIMETABLE = "Timetable"
 
 class Thermostat(SomfyDevice):
     """Class to represent a thermostat."""
