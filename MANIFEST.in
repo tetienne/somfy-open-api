@@ -1,1 +1,11 @@
 include README.md LICENSE
+
+# added by check_manifest.py
+include *.md
+include *.txt
+include mypy.ini
+include tox.ini
+recursive-include tests *.json
+recursive-include tests *.py
+
+include .flake8
