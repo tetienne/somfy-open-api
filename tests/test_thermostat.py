@@ -5,7 +5,8 @@ from datetime import datetime
 import httpretty
 from pytest import fixture
 
-from pymfy.api.devices.thermostat import Thermostat, DurationType, TargetMode
+from pymfy.api.devices.thermostat import Thermostat, DurationType, TargetMode, \
+    RegulationState
 from pymfy.api.model import Device
 from pymfy.api.somfy_api import SomfyApi, BASE_URL
 
@@ -37,10 +38,10 @@ class TestThermostat:
         assert device.get_hvac_state() == "he"
 
     def test_get_regulation_state(self, device):
-        assert device.get_regulation_state() == "Derogation"
+        assert device.get_regulation_state() == RegulationState.DEROGATION
 
     def test_get_target_mode(self, device):
-        assert device.get_target_mode() == "at_home"
+        assert device.get_target_mode() == TargetMode.AT_HOME
 
     def test_get_target_get_temperature(self, device):
         assert device.get_target_temperature() == 18

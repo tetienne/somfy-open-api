@@ -39,11 +39,17 @@ class Thermostat(SomfyDevice):
     def get_hvac_state(self) -> str:
         return cast(str, self.get_state("hvac_state"))
 
-    def get_regulation_state(self) -> str:
-        return cast(str, self.get_state("regulation_state"))
+    def get_regulation_state(self) -> RegulationState:
+        regulation_state = self.get_state("regulation_state")
+        return next(
+            (state for state in RegulationState if state.value == regulation_state)
+        )
 
-    def get_target_mode(self) -> str:
-        return cast(str, self.get_state("target_mode"))
+    def get_target_mode(self) -> TargetMode:
+        target_mode = self.get_state("target_mode")
+        return next(
+            (state for state in TargetMode if state.value == target_mode)
+        )
 
     def get_target_temperature(self) -> int:
         return cast(int, self.get_state("target_temperature"))
