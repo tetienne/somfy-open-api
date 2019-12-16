@@ -38,6 +38,7 @@ after_script:
   - python-codacy-coverage -r coverage.xml
 deploy:
   - provider: pypi
+    edge: true
     user: tetienne
     password:
       secure: Y14WBjQIHQO+uWwLGX6zeYqJv3zyJ1WKyG0KdPLUrL8zMFeaIf+78HPNRawZpVPkhzxEbcPJY1LXsti1663HxCwQB2xdShkU09T3mjn8uQOvdvplYa52valqpfFPcXIHz6S1xX6XUKa5z+8e/YK2Dujo4laiXrdbpuOAXVU+tdJjQMaYgtrFbQIXG8YcybdQ03Um9qOLFTgv1P2qW1EG0DaTrq/egSQwFNNABlpIITIIyExSJRIOf/aAAAGNyE0WLzuSPA686pXAIy5vuvDgBSFQ1V4xzUUi8i7DLQ4aadXul9VXdLJqTAKshBxRqrkuMSgy74NC9mI/z/rTA+O5a8vWNWo0ufn2av8HDH25JYOSJi8hKTDlMcg9fiw5uq6KpLQwmE9SPFG0RITZUpfuCQN9ZXqu5deBE8+LcvPkrPkw6RYpQqXJXgQEdawuo/MyBrB6GUvPSn5AQAprwhOjVxzhcQiYIWStqgEaQV41O+2q6vM7vB7lyZ3fsIEh7RUIYvp+tJUwm14I64Mkxxyg74uBMfNGiZSRW7WZGkLp4suc5tivq27piYbRKggvwrYkz9iSoXSghTHwMcDu1Jyxy4slWtIK4jNOh/onInobAkI2hR0LcqX3te+GBngCcvHkhhDiRXtqE/DWDNDixlOkLHrQ1FtsmY/xnwzK72lO+Ic=
