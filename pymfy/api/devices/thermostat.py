@@ -18,9 +18,11 @@ class DurationType(Enum):
     FURTHER_NOTICE = "further_notice"
     NEXT_MODE = "next_mode"
 
+
 class RegulationState(Enum):
     DEROGATION = "Derogation"
     TIMETABLE = "Timetable"
+
 
 class Thermostat(SomfyDevice):
     """Class to represent a thermostat."""
