@@ -9,19 +9,25 @@ from pymfy.api.model import Command, Parameter
 class TargetMode(Enum):
     AWAY = "away"
     AT_HOME = "at_home"
-    FROST_PROTECTION = "frost_protection"
-    MANUEL = "manuel"
+    FROST_PROTECTION = "freeze"
+    MANUEL = "manual"
     SLEEP = "sleep"
 
 
 class DurationType(Enum):
     FURTHER_NOTICE = "further_notice"
     NEXT_MODE = "next_mode"
+    DATE = "date"
 
 
 class RegulationState(Enum):
     DEROGATION = "Derogation"
     TIMETABLE = "Timetable"
+
+
+class HvacState(Enum):
+    HEAT = "he"
+    COOL = "co"
 
 
 class Thermostat(SomfyDevice):
@@ -36,8 +42,9 @@ class Thermostat(SomfyDevice):
     def get_battery(self) -> int:
         return cast(int, self.get_state("battery"))
 
-    def get_hvac_state(self) -> str:
-        return cast(str, self.get_state("hvac_state"))
+    def get_hvac_state(self) -> HvacState:
+        hvac_state = self.get_state("hvac_state")
+        return next((state for state in HvacState if state.value == hvac_state))
 
     def get_regulation_state(self) -> RegulationState:
         regulation_state = self.get_state("regulation_state")
@@ -47,9 +54,7 @@ class Thermostat(SomfyDevice):
 
     def get_target_mode(self) -> TargetMode:
         target_mode = self.get_state("target_mode")
-        return next(
-            (state for state in TargetMode if state.value == target_mode)
-        )
+        return next((state for state in TargetMode if state.value == target_mode))
 
     def get_target_temperature(self) -> int:
         return cast(int, self.get_state("target_temperature"))
