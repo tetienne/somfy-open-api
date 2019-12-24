@@ -19,12 +19,16 @@ jobs:
         include:
           - toxenv: py35
             python-version: 3.5
+            tox-args: -- --cov-report xml
           - toxenv: py36
             python-version: 3.6
+            tox-args:  -- --cov-report xml
           - toxenv: py37
             python-version: 3.7
+            tox-args:  -- --cov-report xml
           - toxenv: py38
             python-version: 3.8
+            tox-args:  -- --cov-report xml
           - toxenv: black
             python-version: 3.6
           - toxenv: mypy
@@ -44,4 +48,4 @@ jobs:
         pip install tox
     - name: Launch tox
       run: |
-        tox -e ${{ matrix.TOXENV}}
+        tox -e ${{ matrix.TOXENV}} ${{matrix.tox-args}}
