@@ -3,8 +3,7 @@ name: Tox
 on: [push]
 
 jobs:
-  build:
-
+  test:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -49,3 +48,25 @@ jobs:
     - name: Launch tox
       run: |
         tox -e ${{ matrix.TOXENV}} ${{matrix.tox-args}}
+
+  publish:
+    if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - name: Build a binary wheel and a source tarball
+        run: |
+          pip install setuptools wheel
+          python setup.py sdist bdist_wheel
+      - name: Publish package
+        uses: pypa/gh-action-pypi-publish@master
+        with:
+          user: __token__
+          password: ${{ secrets.pypi_testing_token }}
+          repository_url: https://test.pypi.org/legacy/
+
