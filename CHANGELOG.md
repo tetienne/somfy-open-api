@@ -1,3 +1,5 @@
+### 0.8.0
+* Complete thermostat model
 ### 0.7.1
 * Support optional condition
 * Don't break when new parameters are returned by Somfy

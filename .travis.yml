@@ -1,6 +1,3 @@
-branches:
-  only:
-    - master
 env:
   global:
     - CC_TEST_REPORTER_ID=3cd3f4810dc2d510557d2100005fd5e5497683d44f7f56b6fcd1633c3335f46b
@@ -46,3 +43,4 @@ deploy:
     skip_existing: true
     on:
       tags: true
+      branch: master
