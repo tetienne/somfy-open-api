@@ -1,8 +1,33 @@
 from datetime import datetime
-from typing import cast
+from enum import Enum
+from typing import cast, Optional
 
 from pymfy.api.devices.base import SomfyDevice
 from pymfy.api.model import Command, Parameter
+
+
+class TargetMode(Enum):
+    AWAY = "away"
+    AT_HOME = "at_home"
+    FROST_PROTECTION = "freeze"
+    MANUEL = "manual"
+    SLEEP = "sleep"
+
+
+class DurationType(Enum):
+    FURTHER_NOTICE = "further_notice"
+    NEXT_MODE = "next_mode"
+    DATE = "date"
+
+
+class RegulationState(Enum):
+    DEROGATION = "Derogation"
+    TIMETABLE = "Timetable"
+
+
+class HvacState(Enum):
+    HEAT = "he"
+    COOL = "co"
 
 
 class Thermostat(SomfyDevice):
@@ -17,22 +42,31 @@ class Thermostat(SomfyDevice):
     def get_battery(self) -> int:
         return cast(int, self.get_state("battery"))
 
-    def get_hvac_state(self) -> str:
-        return cast(str, self.get_state("hvac_state"))
+    def get_hvac_state(self) -> HvacState:
+        hvac_state = self.get_state("hvac_state")
+        return next((state for state in HvacState if state.value == hvac_state))
 
-    def get_regulation_state(self) -> str:
-        return cast(str, self.get_state("regulation_state"))
+    def get_regulation_state(self) -> RegulationState:
+        regulation_state = self.get_state("regulation_state")
+        return next(
+            (state for state in RegulationState if state.value == regulation_state)
+        )
 
-    def get_target_mode(self) -> str:
-        return cast(str, self.get_state("target_mode"))
+    def get_target_mode(self) -> TargetMode:
+        target_mode = self.get_state("target_mode")
+        return next((state for state in TargetMode if state.value == target_mode))
 
     def get_target_temperature(self) -> int:
         return cast(int, self.get_state("target_temperature"))
 
-    def get_target_end_date(self) -> datetime:
-        return datetime.utcfromtimestamp(cast(int, self.get_state("target_end_date")))
+    def get_target_end_date(self) -> Optional[datetime]:
+        timestamp = self.get_state("target_end_date")
+        if timestamp == -1:
+            return None
+        else:
+            return datetime.utcfromtimestamp(cast(int, timestamp))
 
-    def get_target_start_date(self) -> datetime:
+    def get_target_start_date(self) -> Optional[datetime]:
         return datetime.utcfromtimestamp(cast(int, self.get_state("target_start_date")))
 
     def get_at_home_temperature(self) -> int:
@@ -49,17 +83,18 @@ class Thermostat(SomfyDevice):
 
     def set_target(
         self,
-        target_mode: str,
+        target_mode: TargetMode,
         target_temperature: int,
-        duration: int,
-        duration_type: str,
+        duration_type: DurationType,
+        duration: Optional[int] = None,
     ) -> None:
         parameters = [
-            Parameter("target_mode", target_mode),
+            Parameter("target_mode", target_mode.value),
             Parameter("target_temperature", target_temperature),
-            Parameter("duration", duration),
-            Parameter("duration_type", duration_type),
+            Parameter("duration_type", duration_type.value),
         ]
+        if duration:
+            parameters.append(Parameter("duration", duration))
         command = Command("set_target", parameters)
         self.send_command(command)
 

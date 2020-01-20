@@ -86,5 +86,5 @@ setup(
     include_package_data=True,
     license="GNU General Public License v3.0",
     # $ setup.py publish support.
-    cmdclass={"upload": UploadCommand,},
+    cmdclass={"upload": UploadCommand},
 )

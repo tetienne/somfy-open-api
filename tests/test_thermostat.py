@@ -5,7 +5,13 @@ from datetime import datetime
 import httpretty
 from pytest import fixture
 
-from pymfy.api.devices.thermostat import Thermostat
+from pymfy.api.devices.thermostat import (
+    Thermostat,
+    DurationType,
+    TargetMode,
+    RegulationState,
+    HvacState,
+)
 from pymfy.api.model import Device
 from pymfy.api.somfy_api import SomfyApi, BASE_URL
 
@@ -34,13 +40,13 @@ class TestThermostat:
         assert device.get_battery() == 93
 
     def test_get_hvac_state(self, device):
-        assert device.get_hvac_state() == "he"
+        assert device.get_hvac_state() == HvacState.HEAT
 
     def test_get_regulation_state(self, device):
-        assert device.get_regulation_state() == "Derogation"
+        assert device.get_regulation_state() == RegulationState.DEROGATION
 
     def test_get_target_mode(self, device):
-        assert device.get_target_mode() == "at_home"
+        assert device.get_target_mode() == TargetMode.AT_HOME
 
     def test_get_target_get_temperature(self, device):
         assert device.get_target_temperature() == 18
@@ -65,14 +71,14 @@ class TestThermostat:
 
     def test_set_target(self, device):
         httpretty.register_uri(httpretty.POST, URL, body='{"job_id": "9"}')
-        device.set_target("at_home", 18, 10, "h")
+        device.set_target(TargetMode.AT_HOME, 18, DurationType.FURTHER_NOTICE, 10)
         assert httpretty.last_request().parsed_body == {
             "name": "set_target",
             "parameters": [
                 {"name": "target_mode", "value": "at_home"},
                 {"name": "target_temperature", "value": 18},
+                {"name": "duration_type", "value": "further_notice"},
                 {"name": "duration", "value": 10},
-                {"name": "duration_type", "value": "h"},
             ],
         }
 
