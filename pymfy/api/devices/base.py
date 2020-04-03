@@ -1,6 +1,6 @@
 from typing import Union
 
-from pymfy.api.model import Device, Command
+from pymfy.api.model import Command, Device
 from pymfy.api.somfy_api import SomfyApi
 
 

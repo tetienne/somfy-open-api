@@ -1,0 +1,21 @@
+[BASIC]
+good-names=id
+
+[LOGGING]
+logging-format-style=fstr
+
+[MESSAGES CONTROL]
+disable=
+     missing-module-docstring,
+     missing-class-docstring,
+     missing-function-docstring,
+     no-self-use,
+     too-few-public-methods,
+     too-many-public-methods,
+     too-many-arguments,
+     bad-continuation,
+     import-error,
+     unsubscriptable-object,
+     fixme,
+     pointless-string-statement,
+     redefined-builtin

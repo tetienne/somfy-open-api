@@ -1,6 +1,6 @@
 from datetime import datetime
 from enum import Enum
-from typing import cast, Optional
+from typing import Optional, cast
 
 from pymfy.api.devices.base import SomfyDevice
 from pymfy.api.model import Command, Parameter
@@ -63,8 +63,7 @@ class Thermostat(SomfyDevice):
         timestamp = self.get_state("target_end_date")
         if timestamp == -1:
             return None
-        else:
-            return datetime.utcfromtimestamp(cast(int, timestamp))
+        return datetime.utcfromtimestamp(cast(int, timestamp))
 
     def get_target_start_date(self) -> Optional[datetime]:
         return datetime.utcfromtimestamp(cast(int, self.get_state("target_start_date")))

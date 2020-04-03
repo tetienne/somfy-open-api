@@ -6,7 +6,7 @@ from pytest import fixture
 
 from pymfy.api.devices.camera_protect import CameraProtect
 from pymfy.api.model import Device
-from pymfy.api.somfy_api import SomfyApi, BASE_URL
+from pymfy.api.somfy_api import BASE_URL, SomfyApi
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
