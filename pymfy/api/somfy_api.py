@@ -1,11 +1,11 @@
-from typing import Tuple, List, Optional, Union, Callable, Dict, Any
+from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
+from oauthlib.oauth2 import TokenExpiredError
 from requests import Response
 from requests_oauthlib import OAuth2Session
-from oauthlib.oauth2 import TokenExpiredError
 
 from pymfy.api.devices.category import Category
-from pymfy.api.model import Command, Site, Device
+from pymfy.api.model import Command, Device, Site
 
 BASE_URL = "https://api.somfy.com/api/v1"
 
@@ -39,21 +39,21 @@ class SomfyApi:
         )
 
     def get_sites(self) -> List[Site]:
-        r = self.get("/site")
-        r.raise_for_status()
-        return [Site(**s) for s in r.json()]
+        response = self.get("/site")
+        response.raise_for_status()
+        return [Site(**s) for s in response.json()]
 
     def get_site(self, site_id: str) -> Site:
-        r = self.get("/site/" + site_id)
-        r.raise_for_status()
-        return Site(**r.json())
+        response = self.get("/site/" + site_id)
+        response.raise_for_status()
+        return Site(**response.json())
 
     def send_command(self, device_id: str, command: Union[Command, str]) -> str:
         if isinstance(command, str):
             command = Command(command)
-        r = self.post("/device/" + device_id + "/exec", json=command)
-        r.raise_for_status()
-        return r.json().get("job_id")
+        response = self.post("/device/" + device_id + "/exec", json=command)
+        response.raise_for_status()
+        return response.json().get("job_id")
 
     def get_devices(
         self, site_id: Optional[str] = None, category: Optional[Category] = None
@@ -61,19 +61,19 @@ class SomfyApi:
         site_ids = [s.id for s in self.get_sites()] if site_id is None else [site_id]
         devices = []  # type: List[Device]
         for s_id in site_ids:
-            r = self.get("/site/" + s_id + "/device")
-            r.raise_for_status()
+            response = self.get("/site/" + s_id + "/device")
+            response.raise_for_status()
             devices += [
                 Device(**d)
-                for d in r.json()
+                for d in response.json()
                 if category is None or category.value in Device(**d).categories
             ]
         return devices
 
     def get_device(self, device_id: str) -> Device:
-        r = self.get("/device/" + device_id)
-        r.raise_for_status()
-        return Device(**r.json())
+        response = self.get("/device/" + device_id)
+        response.raise_for_status()
+        return Device(**response.json())
 
     def get(self, path: str) -> Response:
         """Fetch a URL from the Somfy API."""

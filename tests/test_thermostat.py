@@ -6,14 +6,14 @@ import httpretty
 from pytest import fixture
 
 from pymfy.api.devices.thermostat import (
-    Thermostat,
     DurationType,
-    TargetMode,
-    RegulationState,
     HvacState,
+    RegulationState,
+    TargetMode,
+    Thermostat,
 )
 from pymfy.api.model import Device
-from pymfy.api.somfy_api import SomfyApi, BASE_URL
+from pymfy.api.somfy_api import BASE_URL, SomfyApi
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 

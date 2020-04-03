@@ -8,7 +8,7 @@
     <a href="https://codeclimate.com/github/tetienne/somfy-open-api/test_coverage"><img src="https://api.codeclimate.com/v1/badges/efefe25b6c0dc796bc1c/test_coverage" /></a>
     <a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000.svg" /></a>
 </p>
- 
+
 This library is an attempt to implement the entire Somfy API in Python 3.
 Documentation for the Somfy API can be found [here](https://developer.somfy.com/somfy-open-api/apis).
 
@@ -27,7 +27,7 @@ Somfy currently exposes the following type of devices:
   - [Rolling shutters](https://developer.somfy.com/products/rolling-shutters)
   - [Cameras](https://developer.somfy.com/products/cameras)
   - [Connected Thermostat](https://developer.somfy.com/products/connected-thermostat)
-  
+
 If you find on this [page](https://developer.somfy.com/products-services-informations) devices not yet handle by this
 repository, don't hesitate to open an issue.
 
@@ -110,4 +110,3 @@ dumps = re.sub('".*id.*": ".*",\n', '', dumps)
 
 print(dumps)
 ```
-
