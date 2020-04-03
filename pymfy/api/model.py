@@ -1,4 +1,6 @@
-from typing import Dict, Union, List, Optional, Any
+from typing import Any, Dict, List, Optional, Union
+
+# pylint: disable=unused-argument
 
 
 class Site:
