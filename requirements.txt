@@ -1,8 +1,8 @@
 --index-url https://pypi.python.org/simple/
 
 -e .
-pytest>=3.6
-pytest-cov
-httpretty
-pre-commit
-tox
+pytest==5.4.1
+pytest-cov==2.8.1
+httpretty==1.0.2
+pre-commit==2.2.0
+tox==3.14.6
