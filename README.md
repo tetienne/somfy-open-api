@@ -38,7 +38,7 @@ pip install pymfy
 
 ## Example usage
 
-Print all covers name.
+Print all covers position.
 
 ```python
 import os
@@ -49,28 +49,31 @@ from pymfy.api.devices.roller_shutter import RollerShutter
 from pymfy.api.somfy_api import SomfyApi
 from pymfy.api.devices.category import Category
 
-client_id = r'<CLIENT_ID>' # Consumer Key
-redir_url = '<REDIR_URL>' # Callback URL (for testing, can be anything)
-secret = r'<secret>' # Consumer Secret
+client_id = r"<CLIENT_ID>"  # Consumer Key
+redir_url = "<REDIR_URL>"  # Callback URL (for testing, can be anything)
+secret = r"<secret>"  # Consumer Secret
+
 
 def get_token():
-        try:
-            with open(cache_path, 'r') as cache:
-                return json.loads(cache.read())
-        except IOError:
-            pass
+    try:
+        with open(cache_path, "r") as cache:
+            return json.loads(cache.read())
+    except IOError:
+        pass
+
 
 def set_token(token) -> None:
-    with open(cache_path, 'w') as cache:
+    with open(cache_path, "w") as cache:
         cache.write(json.dumps(token))
 
-cache_path = '/optional/cache/path'
+
+cache_path = "/optional/cache/path"
 api = SomfyApi(client_id, secret, redir_url, token=get_token(), token_updater=set_token)
 if not os.path.isfile(cache_path):
     authorization_url, _ = api.get_authorization_url()
-    print('Please go to {} and authorize access.'.format(authorization_url))
-    authorization_response = input('Enter the full callback URL')
-    code = parse_qs(urlparse(authorization_response).query)['code'][0]
+    print("Please go to {} and authorize access.".format(authorization_url))
+    authorization_response = input("Enter the full callback URL")
+    code = parse_qs(urlparse(authorization_response).query)["code"][0]
     set_token(api.request_token(code=code))
 
 devices = api.get_devices(category=Category.ROLLER_SHUTTER)
@@ -78,8 +81,11 @@ devices = api.get_devices(category=Category.ROLLER_SHUTTER)
 covers = [RollerShutter(d, api) for d in devices]
 
 for cover in covers:
-    print("Cover {} has the following position: {}".format(cover.device.name, cover.get_position()))
-
+    print(
+        "Cover {} has the following position: {}".format(
+            cover.device.name, cover.get_position()
+        )
+    )
 ```
 
 ## Contribute
@@ -89,24 +95,26 @@ If you want to contribute to this repository adding new devices, you can create 
 import json
 import re
 from urllib.parse import urlparse, parse_qs
-
-client_id = r'<CLIENT_ID>' # Consumer Key
-redir_url = '<REDIR_URL>' # Callback URL (for testing, can be anything)
-secret = r'<secret>' # Consumer Secret
-
 from pymfy.api.somfy_api import SomfyApi
+
+
+client_id = r"<CLIENT_ID>"  # Consumer Key
+redir_url = "<REDIR_URL>"  # Callback URL (for testing, can be anything)
+secret = r"<secret>"  # Consumer Secret
 
 api = SomfyApi(client_id, secret, redir_url)
 authorization_url, _ = api.get_authorization_url()
-print('Please go to {} and authorize access.'.format(authorization_url))
-authorization_response = input('Enter the full callback URL')
-code = parse_qs(urlparse(authorization_response).query)['code'][0]
+print("Please go to {} and authorize access.".format(authorization_url))
+authorization_response = input("Enter the full callback URL")
+code = parse_qs(urlparse(authorization_response).query)["code"][0]
 api.request_token(code=code)
 
-devices = api.get_devices()
+site_ids = [s.id for s in api.get_sites()]
+devices = [api.get("/site/" + s_id + "/device").json() for s_id in site_ids]
+
 # Remove personal information
-dumps = json.dumps(devices, sort_keys=True, indent=4, separators=(',', ': '))
-dumps = re.sub('".*id.*": ".*",\n', '', dumps)
+dumps = json.dumps(devices, sort_keys=True, indent=4, separators=(",", ": "))
+dumps = re.sub('".*id.*": ".*",\n', "", dumps)
 
 print(dumps)
 ```
