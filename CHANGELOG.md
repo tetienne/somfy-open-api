@@ -1,3 +1,5 @@
+### 0.9.0
+* Add parent id support
 ### 0.8.0
 * Complete thermostat model
 ### 0.7.1

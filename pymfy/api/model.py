@@ -1,6 +1,6 @@
 from typing import Any, Dict, List, Optional, Union
 
-# pylint: disable=unused-argument
+# pylint: disable=unused-argument, too-many-instance-attributes
 
 
 class Site:
@@ -12,7 +12,16 @@ class Site:
 
 
 class Device:
-    __slots__ = "id", "name", "type", "site_id", "states", "capabilities", "categories"
+    __slots__ = (
+        "id",
+        "name",
+        "type",
+        "site_id",
+        "states",
+        "capabilities",
+        "categories",
+        "parent_id",
+    )
 
     def __init__(
         self,
@@ -23,6 +32,7 @@ class Device:
         categories: List[str],
         states: List[Dict[str, Any]],
         capabilities: List[Dict[str, Any]],
+        parent_id: Optional[str] = None,
         name: Optional[str] = None,
         **kwargs: Any
     ):
@@ -33,6 +43,7 @@ class Device:
         self.categories = categories
         self.states = [State(**s) for s in states]
         self.capabilities = [Capability(**c) for c in capabilities]
+        self.parent_id = parent_id
 
 
 class State:
