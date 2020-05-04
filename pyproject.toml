@@ -1,9 +1,12 @@
 [tool.poetry]
 name = "pymfy"
-version = "0.8.0"
+version = "0.9.0"
 description = "A Somfy Open API library"
 authors = ["ETIENNE Thibaut"]
-license = "GNU General Public License v3.0"
+license = "GPL-3.0-only"
+readme = "README.md"
+homepage = "https://github.com/tetienne/somfy-open-api"
+repository = "https://github.com/tetienne/somfy-open-api"
 
 [tool.poetry.dependencies]
 python = ">=3.4"
