@@ -1,6 +1,6 @@
 from typing import Any, Dict, List, Optional, Union
 
-# pylint: disable=unused-argument, too-many-instance-attributes
+# pylint: disable=too-many-instance-attributes
 
 
 class Site:
@@ -66,9 +66,7 @@ class Capability:
 class ParameterDescription:
     __slots__ = "name", "type", "condition"
 
-    def __init__(
-        self, name: str, type: str, condition: Optional[str] = None, **_: Any
-    ):
+    def __init__(self, name: str, type: str, condition: Optional[str] = None, **_: Any):
         self.name = name
         self.type = type
         self.condition = condition
