@@ -22,7 +22,7 @@ class TestSomfyApi:
                 httpretty.GET, BASE_URL + "/site", body=get_sites.read()
             )
         sites = api.get_sites()
-        assert len(sites) == 2
+        assert len(sites) == 3
         assert sites[0].id == "site-1"
         assert sites[0].label == "TaHoma"
         assert sites[1].id == "site-2"
@@ -43,9 +43,12 @@ class TestSomfyApi:
         sites_path = os.path.join(CURRENT_DIR, "get_sites.json")
         devices_path_1 = os.path.join(CURRENT_DIR, "get_devices_1.json")
         devices_path_2 = os.path.join(CURRENT_DIR, "get_devices_2.json")
+        devices_path_3 = os.path.join(CURRENT_DIR, "get_devices_3.json")
         with open(sites_path, "r") as get_sites, open(
             devices_path_1, "r"
-        ) as get_devices_1, open(devices_path_2, "r") as get_devices_2:
+        ) as get_devices_1, open(devices_path_2, "r") as get_devices_2, open(
+            devices_path_3, "r"
+        ) as get_devices_3:
             httpretty.register_uri(
                 httpretty.GET, BASE_URL + "/site", body=get_sites.read()
             )
@@ -58,6 +61,12 @@ class TestSomfyApi:
                 httpretty.GET,
                 BASE_URL + "/site/site-2/device",
                 body=get_devices_2.read(),
+            )
+            httpretty.register_uri(
+                httpretty.GET,
+                BASE_URL + "/site/site-3/device",
+                body=get_devices_3.read(),
+                status=404,
             )
 
         assert len(api.get_devices()) == 4

@@ -1,3 +1,4 @@
+from json import JSONDecodeError
 from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
 from oauthlib.oauth2 import TokenExpiredError
@@ -62,10 +63,18 @@ class SomfyApi:
         devices = []  # type: List[Device]
         for s_id in site_ids:
             response = self.get("/site/" + s_id + "/device")
-            response.raise_for_status()
+            try:
+                content = response.json()
+            except JSONDecodeError:
+                response.raise_for_status()
+
+            if response.status_code != 200:
+                # Can happen when the site does not contain any device
+                continue
+
             devices += [
                 Device(**d)
-                for d in response.json()
+                for d in content
                 if category is None or category.value in Device(**d).categories
             ]
         return devices
