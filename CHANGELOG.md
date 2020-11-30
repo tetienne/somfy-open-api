@@ -1,3 +1,5 @@
+### 0.9.2
+* Various small fixes for the Thermostat
 ### 0.9.1
 * Handle error 404 when site has not device
 ### 0.9.0
