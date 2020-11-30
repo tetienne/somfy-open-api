@@ -12,6 +12,7 @@ class TargetMode(Enum):
     FROST_PROTECTION = "freeze"
     MANUAL = "manuel"  # Yes in French
     SLEEP = "sleep"
+    GEOFENCING = "geofencing"
 
 
 class DurationType(Enum):

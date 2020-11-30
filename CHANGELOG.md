@@ -1,3 +1,5 @@
+### 0.9.3
+* Add geofencing mode for the thermostat
 ### 0.9.2
 * Various small fixes for the Thermostat
 ### 0.9.1
