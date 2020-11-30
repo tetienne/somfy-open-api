@@ -10,7 +10,7 @@ class TargetMode(Enum):
     AWAY = "away"
     AT_HOME = "at_home"
     FROST_PROTECTION = "freeze"
-    MANUEL = "manual"
+    MANUAL = "manuel"  # Yes in French
     SLEEP = "sleep"
 
 
@@ -85,7 +85,7 @@ class Thermostat(SomfyDevice):
         target_mode: TargetMode,
         target_temperature: int,
         duration_type: DurationType,
-        duration: Optional[int] = None,
+        duration: Optional[int] = -1,
     ) -> None:
         parameters = [
             Parameter("target_mode", target_mode.value),
