@@ -10,7 +10,7 @@ class TargetMode(Enum):
     AWAY = "away"
     AT_HOME = "at_home"
     FROST_PROTECTION = "freeze"
-    MANUEL = "manual"
+    MANUAL = "manuel" # Yes in French
     SLEEP = "sleep"
 
 
