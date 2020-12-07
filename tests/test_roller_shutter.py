@@ -16,7 +16,7 @@ class TestRollerShutter:
     def device(self):
         api = SomfyApi("foo", "faa", "https://whatever.com")
         device_path = os.path.join(CURRENT_DIR, "roller_shutter.json")
-        with open(device_path, "r") as get_device:
+        with open(device_path) as get_device:
             device = Device(**json.loads(get_device.read()))
         return RollerShutter(device, api)
 
@@ -25,7 +25,7 @@ class TestRollerShutter:
 
     @httpretty.activate
     def test_set_position(self, device):
-        url = BASE_URL + "/device/device-3/exec"
+        url = f"{BASE_URL}/device/device-3/exec"
         httpretty.register_uri(httpretty.POST, url, body='{"job_id": "9"}')
         device.set_position(78)
         assert httpretty.last_request().parsed_body == {

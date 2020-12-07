@@ -17,7 +17,7 @@ from pymfy.api.somfy_api import BASE_URL, SomfyApi
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-URL = BASE_URL + "/device/device-99/exec"
+URL = f"{BASE_URL}/device/device-99/exec"
 
 
 @httpretty.activate
@@ -26,7 +26,7 @@ class TestThermostat:
     def device(self):
         api = SomfyApi("foo", "faa", "https://whatever.com")
         device_path = os.path.join(CURRENT_DIR, "hvac.json")
-        with open(device_path, "r") as get_device:
+        with open(device_path) as get_device:
             device = Device(**json.loads(get_device.read()))
         return Thermostat(device, api)
 

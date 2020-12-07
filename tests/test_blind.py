@@ -16,7 +16,7 @@ class TestBlind:
     def device(self):
         api = SomfyApi("foo", "faa", "https://whatever.com")
         device_path = os.path.join(CURRENT_DIR, "blind.json")
-        with open(device_path, "r") as get_device:
+        with open(device_path) as get_device:
             device = Device(**json.loads(get_device.read()))
         return Blind(device, api)
 
@@ -25,7 +25,7 @@ class TestBlind:
 
     @httpretty.activate
     def test_set_orientation(self, device):
-        url = BASE_URL + "/device/xxxxxx/exec"
+        url = f"{BASE_URL}/device/xxxxxx/exec"
         httpretty.register_uri(httpretty.POST, url, body='{"job_id": "9"}')
         device.orientation = 78
         assert httpretty.last_request().parsed_body == {

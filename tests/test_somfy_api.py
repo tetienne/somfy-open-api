@@ -17,9 +17,9 @@ class TestSomfyApi:
 
     @httpretty.activate
     def test_get_sites(self, api):
-        with open(os.path.join(CURRENT_DIR, "get_sites.json"), "r") as get_sites:
+        with open(os.path.join(CURRENT_DIR, "get_sites.json")) as get_sites:
             httpretty.register_uri(
-                httpretty.GET, BASE_URL + "/site", body=get_sites.read()
+                httpretty.GET, f"{BASE_URL}/site", body=get_sites.read()
             )
         sites = api.get_sites()
         assert len(sites) == 3
@@ -30,9 +30,9 @@ class TestSomfyApi:
 
     @httpretty.activate
     def test_get_site(self, api):
-        with open(os.path.join(CURRENT_DIR, "get_site.json"), "r") as get_site:
+        with open(os.path.join(CURRENT_DIR, "get_site.json")) as get_site:
             httpretty.register_uri(
-                httpretty.GET, BASE_URL + "/site/site-1", body=get_site.read()
+                httpretty.GET, f"{BASE_URL}/site/site-1", body=get_site.read()
             )
         site = api.get_site("site-1")
         assert site.id == "site-1"
@@ -44,27 +44,25 @@ class TestSomfyApi:
         devices_path_1 = os.path.join(CURRENT_DIR, "get_devices_1.json")
         devices_path_2 = os.path.join(CURRENT_DIR, "get_devices_2.json")
         devices_path_3 = os.path.join(CURRENT_DIR, "get_devices_3.json")
-        with open(sites_path, "r") as get_sites, open(
-            devices_path_1, "r"
-        ) as get_devices_1, open(devices_path_2, "r") as get_devices_2, open(
-            devices_path_3, "r"
-        ) as get_devices_3:
+        with open(sites_path) as get_sites, open(devices_path_1) as get_devices_1, open(
+            devices_path_2
+        ) as get_devices_2, open(devices_path_3) as get_devices_3:
             httpretty.register_uri(
-                httpretty.GET, BASE_URL + "/site", body=get_sites.read()
+                httpretty.GET, f"{BASE_URL}/site", body=get_sites.read()
             )
             httpretty.register_uri(
                 httpretty.GET,
-                BASE_URL + "/site/site-1/device",
+                f"{BASE_URL}/site/site-1/device",
                 body=get_devices_1.read(),
             )
             httpretty.register_uri(
                 httpretty.GET,
-                BASE_URL + "/site/site-2/device",
+                f"{BASE_URL}/site/site-2/device",
                 body=get_devices_2.read(),
             )
             httpretty.register_uri(
                 httpretty.GET,
-                BASE_URL + "/site/site-3/device",
+                f"{BASE_URL}/site/site-3/device",
                 body=get_devices_3.read(),
                 status=404,
             )
@@ -78,9 +76,9 @@ class TestSomfyApi:
     @httpretty.activate
     def test_get_device(self, api):
         device_path = os.path.join(CURRENT_DIR, "roller_shutter.json")
-        with open(device_path, "r") as get_device:
+        with open(device_path) as get_device:
             httpretty.register_uri(
-                httpretty.GET, BASE_URL + "/device/device-3", body=get_device.read()
+                httpretty.GET, f"{BASE_URL}/device/device-3", body=get_device.read()
             )
         device = api.get_device("device-3")
         assert device.id == "device-3"
@@ -91,7 +89,7 @@ class TestSomfyApi:
 
     @httpretty.activate
     def test_send_command(self, api):
-        url = BASE_URL + "/device/my-id/exec"
+        url = f"{BASE_URL}/device/my-id/exec"
         httpretty.register_uri(httpretty.POST, url, body='{"job_id": "9"}')
 
         command = Command(

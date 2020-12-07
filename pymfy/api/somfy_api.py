@@ -45,14 +45,14 @@ class SomfyApi:
         return [Site(**s) for s in response.json()]
 
     def get_site(self, site_id: str) -> Site:
-        response = self.get("/site/" + site_id)
+        response = self.get(f"/site/{site_id}")
         response.raise_for_status()
         return Site(**response.json())
 
     def send_command(self, device_id: str, command: Union[Command, str]) -> str:
         if isinstance(command, str):
             command = Command(command)
-        response = self.post("/device/" + device_id + "/exec", json=command)
+        response = self.post(f"/device/{device_id}/exec", json=command)
         response.raise_for_status()
         return response.json().get("job_id")
 
@@ -62,7 +62,7 @@ class SomfyApi:
         site_ids = [s.id for s in self.get_sites()] if site_id is None else [site_id]
         devices = []  # type: List[Device]
         for s_id in site_ids:
-            response = self.get("/site/" + s_id + "/device")
+            response = self.get(f"/site/{s_id}/device")
             try:
                 content = response.json()
             except JSONDecodeError:
@@ -80,7 +80,7 @@ class SomfyApi:
         return devices
 
     def get_device(self, device_id: str) -> Device:
-        response = self.get("/device/" + device_id)
+        response = self.get(f"/device/{device_id}")
         response.raise_for_status()
         return Device(**response.json())
 
@@ -127,7 +127,7 @@ class SomfyApi:
         We don't use the built-in token refresh mechanism of OAuth2 session because
         we want to allow overriding the token refresh logic.
         """
-        url = BASE_URL + path
+        url = f"{BASE_URL}{path}"
         try:
             return getattr(self._oauth, method)(url, **kwargs)
         except TokenExpiredError:

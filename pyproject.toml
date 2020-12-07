@@ -9,9 +9,8 @@ homepage = "https://github.com/tetienne/somfy-open-api"
 repository = "https://github.com/tetienne/somfy-open-api"
 
 [tool.poetry.dependencies]
-python = ">=3.4"
+python = ">=3.6"
 requests-oauthlib = "^1.3.0"
-typing = { version = "^3.7.4", python = "<3.5" }
 
 [tool.poetry.dev-dependencies]
 tox = ">=3.0"
@@ -21,5 +20,5 @@ httpretty = ">=1.0.2"
 pre-commit = ">=1.10"
 
 [build-system]
-requires = ["poetry>=0.12"]
-build-backend = "poetry.masonry.api"
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

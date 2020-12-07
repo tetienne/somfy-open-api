@@ -32,7 +32,7 @@ class SomfyDevice:
 
     def get_state(self, state_name: str) -> Union[str, int, float]:
         return next(
-            (state.value for state in self.device.states if state.name == state_name)
+            state.value for state in self.device.states if state.name == state_name
         )
 
 
