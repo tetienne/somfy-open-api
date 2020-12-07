@@ -17,7 +17,7 @@ class TestSomfyDevice:
     def device(self):
         api = SomfyApi("foo", "faa", "https://whatever.com")
         device_path = os.path.join(CURRENT_DIR, "roller_shutter.json")
-        with open(device_path, "r") as get_device:
+        with open(device_path) as get_device:
             dumb_device = Device(**json.loads(get_device.read()))
         return SomfyDevice(dumb_device, api)
 
@@ -27,7 +27,7 @@ class TestSomfyDevice:
 
     @httpretty.activate
     def test_send_command(self, device):
-        url = BASE_URL + "/device/" + device.device.id + "/exec"
+        url = f"{BASE_URL}/device/{device.device.id}/exec"
         httpretty.register_uri(httpretty.POST, url)
         # Exception must not be raised
         device.send_command(Command("open"))
@@ -42,9 +42,9 @@ class TestSomfyDevice:
     @httpretty.activate
     def test_refresh_state(self, device):
         device_path = os.path.join(CURRENT_DIR, "roller_shutter_2.json")
-        with open(device_path, "r") as get_device:
+        with open(device_path) as get_device:
             httpretty.register_uri(
-                httpretty.GET, BASE_URL + "/device/device-3", body=get_device.read()
+                httpretty.GET, f"{BASE_URL}/device/device-3", body=get_device.read()
             )
         device.refresh_state()
         assert device.get_state("position") == 70
