@@ -40,3 +40,6 @@ jobs:
         uses: paambaati/codeclimate-action@v2.7.4
         env:
           CC_TEST_REPORTER_ID: ${{secrets.TEST_REPORTER_ID}}
+        with:
+          coverageLocations: .coverage
+
