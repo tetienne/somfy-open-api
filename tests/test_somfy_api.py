@@ -1,6 +1,7 @@
 import os
 
 import httpretty
+import pytest
 from pytest import fixture
 
 from pymfy.api.devices.category import Category
@@ -12,8 +13,9 @@ CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 class TestSomfyApi:
     @fixture
-    def api(self):
-        return SomfyApi("foo", "faa", "https://whatever.com")
+    def api(self, request):
+        params = getattr(request, "param", None) or {}
+        return SomfyApi("foo", "faa", "https://whatever.com", **params)
 
     @httpretty.activate
     def test_get_sites(self, api):
@@ -124,3 +126,16 @@ class TestSomfyApi:
             "name": "close",
             "parameters": [],
         }
+
+    @httpretty.activate
+    @pytest.mark.parametrize(
+        "api, user_agent",
+        [({"user_agent": "awesome"}, "awesome"), (None, "pymfy")],
+        indirect=["api"],
+    )
+    def test_user_agent(self, api, user_agent):
+        # pylint: disable=no-member
+        url = f"{BASE_URL}/device/my-id/exec"
+        httpretty.register_uri(httpretty.POST, url, body='{"job_id": "9"}')
+        api.send_command("my-id", "close")
+        assert httpretty.last_request().headers["user-agent"] == user_agent
