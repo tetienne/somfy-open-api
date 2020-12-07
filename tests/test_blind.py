@@ -28,7 +28,7 @@ class TestBlind:
         url = f"{BASE_URL}/device/xxxxxx/exec"
         httpretty.register_uri(httpretty.POST, url, body='{"job_id": "9"}')
         device.orientation = 78
-        assert httpretty.last_request().parsed_body == {
+        assert httpretty.last_request().parsed_body == {  # pylint: disable=no-member
             "name": "rotation",
             "parameters": [{"name": "orientation", "value": 78}],
         }
