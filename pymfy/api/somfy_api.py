@@ -23,6 +23,7 @@ class SomfyApi:
         redirect_uri: Optional[str] = None,
         token: Optional[Dict[str, str]] = None,
         token_updater: Optional[Callable[[str], None]] = None,
+        user_agent: Optional[str] = "pymfy",
     ):
 
         self.client_id = client_id
@@ -38,6 +39,7 @@ class SomfyApi:
             auto_refresh_kwargs=extra,
             token_updater=token_updater,
         )
+        self._oauth.headers["User-Agent"] = user_agent
 
     def get_sites(self) -> List[Site]:
         response = self.get("/site")
