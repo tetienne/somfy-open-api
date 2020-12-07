@@ -2,7 +2,7 @@
 good-names=id
 
 [LOGGING]
-logging-format-style=fstr
+logging-format-style=new
 
 [MESSAGES CONTROL]
 disable=

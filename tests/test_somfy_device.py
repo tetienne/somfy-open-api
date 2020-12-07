@@ -31,7 +31,7 @@ class TestSomfyDevice:
         httpretty.register_uri(httpretty.POST, url)
         # Exception must not be raised
         device.send_command(Command("open"))
-        assert httpretty.last_request().parsed_body == {
+        assert httpretty.last_request().parsed_body == {  # pylint: disable=no-member
             "name": "open",
             "parameters": [],
         }

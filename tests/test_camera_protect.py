@@ -25,7 +25,7 @@ class TestCameraProtect:
         url = f"{BASE_URL}/device/device-9/exec"
         httpretty.register_uri(httpretty.POST, url, body='{"job_id": "9"}')
         device.open_shutter()
-        assert httpretty.last_request().parsed_body == {
+        assert httpretty.last_request().parsed_body == {  # pylint: disable=no-member
             "name": "shutter_open",
             "parameters": [],
         }
@@ -35,7 +35,7 @@ class TestCameraProtect:
         url = f"{BASE_URL}/device/device-9/exec"
         httpretty.register_uri(httpretty.POST, url, body='{"job_id": "9"}')
         device.close_shutter()
-        assert httpretty.last_request().parsed_body == {
+        assert httpretty.last_request().parsed_body == {  # pylint: disable=no-member
             "name": "shutter_close",
             "parameters": [],
         }

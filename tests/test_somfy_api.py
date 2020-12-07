@@ -89,6 +89,7 @@ class TestSomfyApi:
 
     @httpretty.activate
     def test_send_command(self, api):
+        # pylint: disable=no-member
         url = f"{BASE_URL}/device/my-id/exec"
         httpretty.register_uri(httpretty.POST, url, body='{"job_id": "9"}')
 
