@@ -1,6 +1,8 @@
 from json import JSONDecodeError
 from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
+import backoff
+import requests
 from oauthlib.oauth2 import TokenExpiredError
 from requests import Response
 from requests_oauthlib import OAuth2Session
@@ -51,6 +53,9 @@ class SomfyApi:
         response.raise_for_status()
         return Site(**response.json())
 
+    @backoff.on_exception(
+        backoff.expo, requests.exceptions.HTTPError, max_tries=5, jitter=None
+    )
     def send_command(self, device_id: str, command: Union[Command, str]) -> str:
         if isinstance(command, str):
             command = Command(command)
