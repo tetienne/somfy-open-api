@@ -429,7 +429,7 @@ testing = ["fields", "hunter", "process-tests (==2.0.2)", "six", "pytest-xdist",
 
 [[package]]
 name = "pyupgrade"
-version = "2.8.0"
+version = "2.10.0"
 description = "A tool to automatically upgrade syntax for newer versions."
 category = "dev"
 optional = false
@@ -605,7 +605,7 @@ testing = ["pytest (>=3.5,!=3.7.3)", "pytest-checkdocs (>=1.2.3)", "pytest-flake
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.6.1,<4.0"
-content-hash = "107172323514f1311d7d6aa38c49a74973576e4f665e3875356f3590458634a4"
+content-hash = "84374e27a28b3f4e6a73b756bfd18bf494b444bca777fe09467a839bc0193648"
 
 [metadata.files]
 appdirs = [
@@ -849,8 +849,8 @@ pytest-cov = [
     {file = "pytest_cov-2.11.1-py2.py3-none-any.whl", hash = "sha256:bdb9fdb0b85a7cc825269a4c56b48ccaa5c7e365054b6038772c32ddcdc969da"},
 ]
 pyupgrade = [
-    {file = "pyupgrade-2.8.0-py2.py3-none-any.whl", hash = "sha256:8770ea7537f717f819fba7ccb5d5ea91a9491ad40b3068ae606abd1e5cc8559a"},
-    {file = "pyupgrade-2.8.0.tar.gz", hash = "sha256:1e920e454e97357dcaadf604afb0cb9a75e2b0f625457908c9e9da3f5b3f82f5"},
+    {file = "pyupgrade-2.10.0-py2.py3-none-any.whl", hash = "sha256:b26a00db6e2d745fe5a949e1fd02c5286c3999edaf804f746c69d559c8f8b365"},
+    {file = "pyupgrade-2.10.0.tar.gz", hash = "sha256:601427033f280d50b5b102fed1013b96f91244777772114aeb7e191762cd6050"},
 ]
 pyyaml = [
     {file = "PyYAML-5.3.1-cp27-cp27m-win32.whl", hash = "sha256:74809a57b329d6cc0fdccee6318f44b9b8649961fa73144a98735b0aaf029f1f"},
