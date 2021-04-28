@@ -19,7 +19,7 @@ class RollerShutter(SomfyDevice):
         command = Command("position_low_speed", Parameter("position", 100) if low_speed else "close")
         self.send_command(command)
 
-    def open(self, low_speed: Optional[int] = False) -> None:
+    def open(self, low_speed: Optional[bool] = False) -> None:
         command = Command("position_low_speed", Parameter("position", 0) if low_speed else "open")
         self.send_command(command)
 
