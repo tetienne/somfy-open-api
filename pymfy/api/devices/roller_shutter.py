@@ -15,11 +15,17 @@ class RollerShutter(SomfyDevice):
         command = Command(command_name, Parameter("position", value))
         self.send_command(command)
 
-    def close(self) -> None:
-        self.send_command(Command("close"))
+    def close(self, low_speed: Optional[bool] = False) -> None:
+        if low_speed:
+            self.set_position(100, True)
+        else:
+            self.send_command(Command("close"))
 
-    def open(self) -> None:
-        self.send_command(Command("open"))
+    def open(self, low_speed: Optional[bool] = False) -> None:
+        if low_speed:
+            self.set_position(0, True)
+        else:
+            self.send_command(Command("open"))
 
     def stop(self) -> None:
         self.send_command(Command("stop"))
