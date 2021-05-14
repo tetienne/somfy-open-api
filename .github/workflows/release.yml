@@ -21,16 +21,6 @@ jobs:
         with:
           python-version: "3.9"
 
-      - name: Upgrade pip
-        run: |
-          pip install --constraint=.github/workflows/constraints.txt pip
-          pip --version
-
-      - name: Install Poetry
-        run: |
-          pip install --constraint=.github/workflows/constraints.txt poetry
-          poetry --version
-
       - name: Check if there is a parent commit
         id: check-parent-commit
         run: |
@@ -43,13 +33,6 @@ jobs:
         with:
           version-command: |
             bash -o pipefail -c "poetry version | awk '{ print \$2 }'"
-
-      - name: Bump version for developmental release
-        if: "! steps.check-version.outputs.tag"
-        run: |
-          poetry version patch &&
-          version=$(poetry version | awk '{ print $2 }') &&
-          poetry version $version.dev.$(date +%s)
 
       - name: Build package
         run: |
