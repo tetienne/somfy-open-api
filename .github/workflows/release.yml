@@ -22,9 +22,7 @@ jobs:
           python-version: "3.7"
 
       - name: Install and set up Poetry
-        run: |
-          curl -o get-poetry.py https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py
-          python get-poetry.py -y
+        uses: abatilo/actions-poetry@v2.0.0
 
       - name: Check if there is a parent commit
         id: check-parent-commit
