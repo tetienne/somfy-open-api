@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pymfy"
-version = "0.10.0"
+version = "0.10.1"
 description = "A Somfy Open API library"
 authors = ["ETIENNE Thibaut"]
 license = "GPL-3.0-only"
