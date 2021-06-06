@@ -36,6 +36,24 @@ repository, don't hesitate to open an issue.
 pip install pymfy
 ```
 
+## Limitation
+
+Somfy support sent the following message to third party applications using their API.
+
+```
+Dear customer,
+
+As you might have noticed, we have updated the quota policy of the Somfy Open API, in an ongoing effort to provide the best services to our users.
+
+We are contacting you today to inform you about the new rules we are now applying to the API:
+- First of all, no limitation will be applied on the POST /device/{deviceId}/exec endpoint as we want to provide you a total freedom on controlling your devices.
+- On the other hand, polling frequency on the GET /site and child endpoints will now have to be under 1 call per minute.
+
+To preserve an efficient and available service to any of our users, we want to keep the usage of the Open API to a usable but reasonable level to everybody. As we will keep monitoring the generated traffic and the potential impacts, be aware that we do reserve the rights to modify the authorized polling frequency or take any additional measure at any time as stated in our General Terms of Use.
+
+Thank you for your understanding.
+```
+
 ## Example usage
 
 Print all covers position.
