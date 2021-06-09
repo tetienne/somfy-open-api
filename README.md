@@ -12,26 +12,28 @@
 This library is an attempt to implement the entire Somfy API in Python 3.
 Documentation for the Somfy API can be found [here](https://developer.somfy.com/somfy-open-api/apis).
 
-
 ## Get developer credentials
 
 1. Vist https://developer.somfy.com
 2. Create an account
-3. Open the *My Apps* menu
+3. Open the _My Apps_ menu
 4. Add a new App (for testing, redirect url can be anything in https)
-4. Plug in your details into the test script below.
+5. Plug in your details into the test script below.
 
 ## Supported devices
+
 Somfy currently exposes the following type of devices:
-  - [Blinds](https://developer.somfy.com/products/blinds-interior-and-exterior)
-  - [Rolling shutters](https://developer.somfy.com/products/rolling-shutters)
-  - [Cameras](https://developer.somfy.com/products/cameras)
-  - [Connected Thermostat](https://developer.somfy.com/products/connected-thermostat)
+
+- [Blinds](https://developer.somfy.com/products/blinds-interior-and-exterior)
+- [Rolling shutters](https://developer.somfy.com/products/rolling-shutters)
+- [Cameras](https://developer.somfy.com/products/cameras)
+- [Connected Thermostat](https://developer.somfy.com/products/connected-thermostat)
 
 If you find on this [page](https://developer.somfy.com/products-services-informations) devices not yet handle by this
 repository, don't hesitate to open an issue.
 
 ## Installation
+
 ```
 pip install pymfy
 ```
@@ -94,7 +96,8 @@ if not os.path.isfile(cache_path):
     code = parse_qs(urlparse(authorization_response).query)["code"][0]
     set_token(api.request_token(code=code))
 
-devices = api.get_devices(category=Category.ROLLER_SHUTTER)
+site_ids = api.get_sites()
+devices = api.get_devices(site_ids[0], category=Category.ROLLER_SHUTTER)
 
 covers = [RollerShutter(d, api) for d in devices]
 
@@ -107,8 +110,10 @@ for cover in covers:
 ```
 
 ## Contribute
+
 The current [documentation](https://developer.somfy.com/products-services-informations) does not give enough information to implement all the devices.
 If you want to contribute to this repository adding new devices, you can create an issue with the output of this script:
+
 ```python
 import json
 import re

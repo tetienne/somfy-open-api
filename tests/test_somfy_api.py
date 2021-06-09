@@ -45,10 +45,9 @@ class TestSomfyApi:
         sites_path = os.path.join(CURRENT_DIR, "get_sites.json")
         devices_path_1 = os.path.join(CURRENT_DIR, "get_devices_1.json")
         devices_path_2 = os.path.join(CURRENT_DIR, "get_devices_2.json")
-        devices_path_3 = os.path.join(CURRENT_DIR, "get_devices_3.json")
         with open(sites_path) as get_sites, open(devices_path_1) as get_devices_1, open(
             devices_path_2
-        ) as get_devices_2, open(devices_path_3) as get_devices_3:
+        ) as get_devices_2:
             httpretty.register_uri(
                 httpretty.GET, f"{BASE_URL}/site", body=get_sites.read()
             )
@@ -62,17 +61,9 @@ class TestSomfyApi:
                 f"{BASE_URL}/site/site-2/device",
                 body=get_devices_2.read(),
             )
-            httpretty.register_uri(
-                httpretty.GET,
-                f"{BASE_URL}/site/site-3/device",
-                body=get_devices_3.read(),
-                status=404,
-            )
 
-        assert len(api.get_devices()) == 4
         assert len(api.get_devices("site-1")) == 3
         assert len(api.get_devices(site_id="site-1")) == 3
-        assert len(api.get_devices(category=Category.ROLLER_SHUTTER)) == 3
         assert len(api.get_devices("site-2", Category.ROLLER_SHUTTER)) == 1
 
     @httpretty.activate

@@ -59,26 +59,19 @@ class SomfyApi:
         return response.json().get("job_id")
 
     def get_devices(
-        self, site_id: Optional[str] = None, category: Optional[Category] = None
+        self, site_id: str, category: Optional[Category] = None
     ) -> List[Device]:
-        site_ids = [s.id for s in self.get_sites()] if site_id is None else [site_id]
-        devices = []  # type: List[Device]
-        for s_id in site_ids:
-            response = self.get(f"/site/{s_id}/device")
-            try:
-                content = response.json()
-            except JSONDecodeError:
-                response.raise_for_status()
+        response = self.get(f"/site/{site_id}/device")
+        try:
+            content = response.json()
+        except JSONDecodeError:
+            response.raise_for_status()
 
-            if response.status_code != 200:
-                # Can happen when the site does not contain any device
-                continue
-
-            devices += [
-                Device(**d)
-                for d in content
-                if category is None or category.value in Device(**d).categories
-            ]
+        devices = [
+            Device(**d)
+            for d in content
+            if category is None or category.value in Device(**d).categories
+        ]
         return devices
 
     def get_device(self, device_id: str) -> Device:
