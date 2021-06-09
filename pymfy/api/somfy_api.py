@@ -6,6 +6,7 @@ from requests import Response
 from requests_oauthlib import OAuth2Session
 
 from pymfy.api.devices.category import Category
+from pymfy.api.error import CLIENT_ERROR, SERVER_ERROR, ClientException, ServerException
 from pymfy.api.model import Command, Device, Site
 
 BASE_URL = "https://api.somfy.com/api/v1"
@@ -124,8 +125,24 @@ class SomfyApi:
         """
         url = f"{BASE_URL}{path}"
         try:
-            return getattr(self._oauth, method)(url, **kwargs)
+            response = getattr(self._oauth, method)(url, **kwargs)
         except TokenExpiredError:
             self._oauth.token = self.refresh_tokens()
 
-            return getattr(self._oauth, method)(url, **kwargs)
+            response = getattr(self._oauth, method)(url, **kwargs)
+
+        self._check_response(response)
+        return response
+
+    def _check_response(self, response: Response) -> None:
+        """Check response does not contain any error."""
+        if response.status_code == 200:
+            return
+        error = response.json()
+        if "fault" in error:
+            error_code = error["fault"]["detail"]["errorcode"]
+            raise SERVER_ERROR.get(error_code, ServerException)(error)
+        if "message" in error:
+            message = error["message"]
+            raise CLIENT_ERROR.get(message, ClientException)(error)
+        response.raise_for_status()
