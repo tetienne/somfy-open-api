@@ -7,6 +7,9 @@ class ServerException(Exception):
         self.fault_string = response["fault"]["faultstring"]
         super().__init__()
 
+    def __str__(self) -> str:
+        return f"error_code: {self.error_code}, fault_string: {self.fault_string}"
+
 
 class InvalidAccessTokenException(ServerException):
     pass
@@ -25,6 +28,9 @@ class ClientException(Exception):
         self.data = response["data"]
         self.message = response["message"]
         super().__init__()
+
+    def __str__(self) -> str:
+        return f"message: {self.message}, data: {self.data}"
 
 
 class ValidateException(ClientException):
