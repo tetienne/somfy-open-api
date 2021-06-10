@@ -3,6 +3,7 @@ import os
 import httpretty
 import pytest
 from pytest import fixture
+from requests.models import HTTPError
 
 from pymfy.api.devices.category import Category
 from pymfy.api.error import (
@@ -163,4 +164,10 @@ class TestSomfyApi:
                 httpretty.GET, f"{BASE_URL}/site", body=error.read(), status=400
             )
         with pytest.raises(exception):
+            api.get_sites()
+
+    @httpretty.activate
+    def test_unknown_error(self, api):
+        httpretty.register_uri(httpretty.GET, f"{BASE_URL}/site", body="", status=404)
+        with pytest.raises(HTTPError):
             api.get_sites()

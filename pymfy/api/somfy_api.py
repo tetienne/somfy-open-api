@@ -138,11 +138,11 @@ class SomfyApi:
         """Check response does not contain any error."""
         if response.status_code == 200:
             return
-        error = response.json()
-        if "fault" in error:
-            error_code = error["fault"]["detail"]["errorcode"]
-            raise SERVER_ERROR.get(error_code, ServerException)(error)
-        if "message" in error:
-            message = error["message"]
-            raise CLIENT_ERROR.get(message, ClientException)(error)
+        raw_content = response.text
+        if "fault" in raw_content:
+            error_code = response.json()["fault"]["detail"]["errorcode"]
+            raise SERVER_ERROR.get(error_code, ServerException)(response.json())
+        if "message" in raw_content:
+            message = response.json()["message"]
+            raise CLIENT_ERROR.get(message, ClientException)(response.json())
         response.raise_for_status()
