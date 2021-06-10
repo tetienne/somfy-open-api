@@ -1,0 +1,8 @@
+{
+  "fault": {
+    "faultstring": "Access Token expired",
+    "detail": {
+      "errorcode": "keymanagement.service.access_token_expired"
+    }
+  }
+}

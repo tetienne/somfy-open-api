@@ -1,0 +1,8 @@
+{
+  "fault": {
+    "detail": {
+      "errorcode": "policies.ratelimit.QuotaViolation"
+    },
+    "faultstring": "Rate limit quota violation. Quota limit exceeded."
+  }
+}

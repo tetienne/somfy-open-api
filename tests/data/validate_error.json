@@ -1,0 +1,12 @@
+{
+  "uid": "dd7bf078a314",
+  "message": "ValidateError",
+  "transactionId": "2fb262b0-c918-11eb-bbf3-619c6ebbae8b",
+  "data": {
+    "fields": {
+      "command.name": {
+        "message": "'name' is required"
+      }
+    }
+  }
+}
