@@ -5,6 +5,16 @@ import pytest
 from pytest import fixture
 
 from pymfy.api.devices.category import Category
+from pymfy.api.error import (
+    AccessTokenException,
+    DefinitionNotFoundException,
+    DeviceNotFoundException,
+    InvalidAccessTokenException,
+    QuotaViolationException,
+    SetupNotFoundException,
+    SiteNotFoundException,
+    ValidateException,
+)
 from pymfy.api.model import Command, Parameter
 from pymfy.api.somfy_api import BASE_URL, SomfyApi
 
@@ -130,3 +140,27 @@ class TestSomfyApi:
         httpretty.register_uri(httpretty.POST, url, body='{"job_id": "9"}')
         api.send_command("my-id", "close")
         assert httpretty.last_request().headers["user-agent"] == user_agent
+
+    @httpretty.activate
+    @pytest.mark.parametrize(
+        "api, error_file, exception",
+        [
+            (None, "access_token_expired", AccessTokenException),
+            (None, "definition_not_found", DefinitionNotFoundException),
+            (None, "device_not_found", DeviceNotFoundException),
+            (None, "invalid_access_token", InvalidAccessTokenException),
+            (None, "quota_violation", QuotaViolationException),
+            (None, "setup_not_found", SetupNotFoundException),
+            (None, "site_not_found", SiteNotFoundException),
+            (None, "validate_error", ValidateException),
+        ],
+        indirect=["api"],
+    )
+    def test_error(self, api, error_file, exception):
+        path = os.path.join(CURRENT_DIR, f"data/{error_file}.json")
+        with open(path) as error:
+            httpretty.register_uri(
+                httpretty.GET, f"{BASE_URL}/site", body=error.read(), status=400
+            )
+        with pytest.raises(exception):
+            api.get_sites()
