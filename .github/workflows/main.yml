@@ -37,7 +37,7 @@ jobs:
           python -m tox -- --cov=pymfy --cov-report xml
 
       - name: Publish code coverage
-        uses: paambaati/codeclimate-action@v2.7.4
+        uses: paambaati/codeclimate-action@v3.0.0
         env:
           CC_TEST_REPORTER_ID: ${{secrets.TEST_REPORTER_ID}}
         with:
