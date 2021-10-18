@@ -22,7 +22,7 @@ jobs:
           python-version: "3.7"
 
       - name: Install and set up Poetry
-        uses: abatilo/actions-poetry@v2.1.2
+        uses: abatilo/actions-poetry@v2.1.4
 
       - name: Check if there is a parent commit
         id: check-parent-commit
